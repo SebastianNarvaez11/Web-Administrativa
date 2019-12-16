@@ -1,0 +1,64 @@
+.contenedor {
+    max-width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.imagen {
+    object-fit: cover;
+    width: 100%;
+    height: 300px;
+}
+
+.bloque {
+    max-width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.fotobloque {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.rocket {
+    width: 50%;
+    height: auto;
+}
+
+.titulo {
+    white-space: nowrap;
+    font-size: 100%;
+}
+
+.contcard {
+    position: relative;
+}
+
+.menu {
+    width: 100%;
+}
+
+.capa {
+    filter: blur(5px);
+}
+
+.capa:hover {
+    filter: blur(0px)
+}
+
+#grado {
+    font-size: 150px;
+    color: white;
+    font-family: 'Lilita One', cursive;
+    position: absolute;
+}
+
+#materia {
+    font-size: 50px;
+    color: #007bff;
+    font-family: 'Lilita One', cursive;
+}
+
+#materia:hover{
+    color: white;
+}

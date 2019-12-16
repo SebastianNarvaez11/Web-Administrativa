@@ -1,0 +1,61 @@
+<div class="modal-dialog ">
+    <div class="modal-content">
+        <form action="{% url 'grado_urldash:update' grado.id %}" enctype="multipart/form-data" role="form"
+            method="POST">
+            {% csrf_token %}
+            <div class="modal-header border-bottom-warning">
+                <h5 class="modal-title " id="exampleModalLabel">
+                    <div class="font-weight-bold text-uppercase mb-1">
+                        Editar Grado
+                    </div>
+                </h5>
+                <i class="fas fa-users fa-2x text-gray-300 "></i>
+            </div>
+            <div class="modal-body">
+                {{form.imagen}}
+                <div class="row mt-3">
+                    <div class="col-xl-12 col-md-12 col-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" required name="nombre"
+                                id="id_nombre" placeholder="Nombre"
+                                value="{% if form.nombre.value %}{{grado.nombre}}{%endif%}">
+                            <small class="text-danger"> {{ form.nombre.errors }}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-8 col-8">
+                        <div class="form-group ">
+                            <input type="text" class="form-control form-control-user" name="jornada" id="id_jornada"
+                                placeholder="Jornada" value="{% if form.jornada.value %}{{grado.jornada}}{%endif%}"
+                                maxlength="80">
+                            <small class="text-danger"> {{ form.jornada.errors }}</small>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control form-control-user" required name="numeracion"
+                                id="id_nomeracion" placeholder="Numeracion"
+                                value="{% if form.numeracion.value %}{{grado.numeracion}}{%endif%}">
+                            <small class="text-danger"> {{ form.numeracion.errors }}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xl-12 col-lg-12">
+                        {{form.materias}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-bottom-warning">
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+                        <a href="#" onclick="return cerrar_modal()" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

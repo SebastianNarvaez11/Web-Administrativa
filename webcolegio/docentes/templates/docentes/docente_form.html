@@ -1,0 +1,78 @@
+{% extends 'dash/base.html' %}
+{% load static %}
+{% block titulo %} Academico | Docentes {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        Nuevo Docente
+                    </div>
+                    <div class="dropdown-divider"></div>
+
+                    <form method="POST" class="user" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                Seleccione una foto:
+                                <br>
+                                <input type="file" name="imagen" class="form-control-file mt-3" id="id_imagen">
+                                <small class="text-danger"> {{ form.imagen.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="nombre"
+                                    id="id_nombre" placeholder="Nombre"
+                                    value="{% if form.nombre.value %}{{form.nombre.value}}{%endif%}" maxlength="20">
+                                <small class="text-danger"> {{ form.nombre.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="apellido"
+                                    id="id_apellido" placeholder="Apellido"
+                                    value="{% if form.apellido.value %}{{form.apellido.value}}{%endif%}" maxlength="50">
+                                <small class="text-danger"> {{ form.apellido.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                <input type="text" class="form-control form-control-user" required name="informacion"
+                                    id="id_informacion" placeholder="Informacion del docente"
+                                    value="{% if form.informacion.value %}{{form.informacion.value}}{%endif%}"
+                                    maxlength="50">
+                                <small class="text-danger"> {{ form.informacion.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-6">
+                                Selecciones las Materias:
+                                <br>
+                                {{form.materias}}
+                                <small class="text-danger"> {{ form.materias.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                Grados a los que enseña:
+                                <br>
+                                {{form.grados}}
+                                <small class="text-danger"> {{ form.grados.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success">Crear</button>
+                                <a href="{% url 'docente_urldash:list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--
+                    {{form.as_p}}
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

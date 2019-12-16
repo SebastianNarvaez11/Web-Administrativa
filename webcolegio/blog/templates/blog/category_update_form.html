@@ -1,0 +1,32 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form action="{% url 'category_dash:update' category.id%}" method="POST">
+            {% csrf_token %}
+            <div class="modal-header border-bottom-warning">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <div class="font-weight-bold mb-1">
+                        Modificar Categoria
+                    </div>
+                </h5>
+                <i class="far fa-bookmark fa-2x text-gray-300"></i>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" required name="nombre"
+                                id="id_nombre" placeholder="Nombre"
+                                value="{% if form.nombre.value %}{{form.nombre.value}}{%endif%}">
+                            <small class="text-danger"> {{ form.nombre.errors }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-bottom-warning">
+                <button type="submit" class="btn btn-success">Actualizar</button>
+                <button onclick="return cerrar_modal()" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+</div>

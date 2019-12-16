@@ -1,0 +1,36 @@
+<div class="modal-dialog ">
+    <div class="modal-content">
+        <form action="{% url 'category_dash:create' %}" role="form" method="POST">
+            {% csrf_token %}
+            <div class="modal-header border-bottom-success">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <div class="font-weight-bold text-uppercase mb-1">
+                        Nueva Categoria
+                    </div>
+                </h5>
+                <i class="far fa-bookmark fa-2x text-gray-300"></i>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" required name="nombre"
+                                id="id_nombre" placeholder="Nombre"
+                                value="{% if form.nombre.value %}{{form.nombre.value}}{%endif%}">
+                            <small class="text-danger"> {{ form.nombre.errors }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-bottom-success">
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-success">Crear</button>
+                        <a href="#" onclick="return cerrar_modal()" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

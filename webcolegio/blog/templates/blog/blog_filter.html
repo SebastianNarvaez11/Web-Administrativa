@@ -1,0 +1,104 @@
+{% extends 'core/about.html' %}
+{% load static %}
+
+
+{% block titulo %}
+Academico | Post
+{% endblock titulo %}
+
+{% block titulobaner %}
+<div class="text-center d-flex justify-content-center">
+    {{grado.nombre}} - {{grado.numeracion}}°
+</div>
+
+{% endblock titulobaner %}
+
+{% block body %}
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-12">
+        <div class="section_tittle text-center">
+            <h2>{{materia.nombre}}</h2>
+        </div>
+    </div>
+</div>
+<!--================Blog Area =================-->
+<section class="blog_area section_padding pt-2">
+    <div class="container">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <article class="blog_item border">
+                        <div class="blog_item_img">
+                            <a href="{% url 'detallepost' post.slug %}">
+                                <img class="card-img rounded-0" src="{{ post.imagen.url }}" alt="">
+                            </a>
+                            <a href="{% url 'detallepost' post.slug %}" class="blog_item_date text-center">
+                                <h3>{{ post.publicacion|date:"d" }}</h3>
+                                <p>{{ post.publicacion|date:"M" }}</p>
+                            </a>
+                        </div>
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="{% url 'detallepost' post.slug %}">
+                                <h2>{{ post.titulo }}</h2>
+                            </a>
+                            <p>{{ post.descripcion }}</p>
+                            <ul class="blog-info-link">
+                                <li>
+                                    {% for categoria in post.categoria.all %}
+                                    <a href="#"><i class="far fa-user"></i>
+                                        {{ categoria.nombre }}{% if not forloop.last %},{% endif %}</a>
+                                    {% endfor %}
+                                </li>
+                                <li>
+                                    <a href="">{{post.materia}}</a>
+                                </li>
+                                <li class="float-right">
+                                    <a href="">Autor: {{post.autor}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {%block nav%}
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <nav class="blog-pagination ">
+                    <div class="pagination">
+                        {% if posts.has_previous %}
+                        <li class="page-item">
+                            <a href="?page=1" class="page-link">1</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a href="?page={{ posts.previous_page_number }}" class="page-link" aria-label="Previous"><i
+                                    class="ti-angle-left"></i></a>
+                        </li>
+                        {% endif %}
+
+                        <span class="current mr-2 mt-2">
+                            Pagina {{ posts.number }} de {{ posts.paginator.num_pages }}
+                        </span>
+
+                        {% if posts.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ posts.next_page_number }}" class="page-link" aria-label="Next">
+                                <i class="ti-angle-right"></i></a>
+                        </li>
+
+                        <li class="page-item bg-primary">
+                            <a href="?page={{ posts.paginator.num_pages }}"
+                                class="page-link">{{ posts.paginator.num_pages }}</a>
+                        </li>
+                        {% endif %}
+                    </div>
+                </nav>
+            </div>
+        </div>
+        {%endblock nav%}
+    </div>
+</section>
+{% endblock body %}

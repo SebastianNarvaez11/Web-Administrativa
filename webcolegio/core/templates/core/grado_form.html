@@ -1,0 +1,66 @@
+<div class="modal-dialog ">
+    <div class="modal-content">
+        <form action="{% url 'grado_urldash:create' %}" enctype="multipart/form-data" role="form" method="POST">
+            {% csrf_token %}
+            <div class="modal-header border-bottom-success">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <div class="font-weight-bold text-uppercase mb-1">
+                        Añadir un Grado
+                    </div>
+                </h5>
+                <i class="fas fa-users fa-2x text-gray-300 "></i>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" required name="nombre"
+                                id="id_nombre" placeholder="Nombre"
+                                value="{% if form.nombre.value %}{{form.nombre.value}}{%endif%}">
+                            <small class="text-danger"> {{ form.nombre.errors }}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-8 col-8">
+                        <div class="form-group ">
+                            <input type="text" class="form-control form-control-user" name="jornada" id="id_jornada"
+                                placeholder="Jornada" value="{% if form.jornada.value %}{{form.jornada.value}}{%endif%}"
+                                maxlength="80">
+                            <small class="text-danger"> {{ form.jornada.errors }}</small>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control form-control-user" required name="numeracion"
+                                id="id_nomeracion" placeholder="Numeracion"
+                                value="{% if form.numeracion.value %}{{form.numeracion.value}}{%endif%}">
+                            <small class="text-danger"> {{ form.numeracion.errors }}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xl-12 col-lg-12">
+                        Seleccione una foto:
+                        <input type="file" name="imagen" class="form-control-file mt-3" id="id_imagen">
+                        <small class="text-danger"> {{ form.imagen.errors }}</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xl-12 col-lg-12">
+                        {{form.materias}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-bottom-success">
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-success">Crear</button>
+                        <a href="#" onclick="return cerrar_modal()" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

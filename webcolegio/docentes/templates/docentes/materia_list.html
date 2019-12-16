@@ -1,0 +1,84 @@
+{% extends 'dash/base.html' %}
+{% load static %}
+{% block titulo %} Academico | Materias {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Asignaturas</h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Gestionar Materias</div>
+                    <a class="dropdown-item" onclick="return abrir_modal('{% url 'materia_urldash:create' %}')"
+                        href="#">
+                        Nueva <i class="fas fa-plus"></i>
+                    </a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                {% if not materia_list %}
+                <div class="alert alert-info" role="alert">
+                    No hay materias para mostrar
+                </div>
+                {% else %}
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Creacion</th>
+                            <th scope="col">Edicion</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for materia in materia_list %}
+                        <tr>
+                            <th scope="row">{{materia.id}}</th>
+                            <td>{{materia.nombre}}</td>
+                            <td>{{materia.creacion|date:"d/m/y"}}</td>
+                            <td>{{materia.edicion|date:"d/m/y"}}</td>
+                            <td><a href="#"
+                                    onclick=" return abrir_modal('{% url 'materia_urldash:update' materia.id %}')"
+                                    class="btn btn-warning btn-circle">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-danger btn-circle">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /.container-fluid -->
+{% endblock contenido %}
+
+{% block jscript %}
+<!-- Page level plugins -->
+<script src="{% static 'dash/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'dash/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'dash/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'dash/js/demo/datatables-demo.js' %}"></script>
+
+{% endblock jscript %}

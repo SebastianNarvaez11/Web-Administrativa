@@ -1,0 +1,42 @@
+{% extends 'blog/blog.html' %}
+{% load static %}
+
+
+{% block titulo %}
+Academico | Blog
+{% endblock titulo %}
+
+{% block titulobaner %}
+{{ post.titulo }}
+{% endblock titulobaner %}
+
+
+{% block post%}
+<div class="posts-list">
+   <div class="single-post">
+      <div class="feature-img">
+         <img class="img-fluid" src="{{ post.imagen.url }}" alt="">
+      </div>
+      <div class="blog_details">
+         <h2>{{post.descripcion}}</h2>
+         <ul class="blog-info-link mt-3 mb-4">
+            <li>
+               {% for categoria in post.categoria.all %}
+               <a href="#"><i class="far fa-user"></i>
+                  {{ categoria.nombre }}{% if not forloop.last %},{% endif %}</a>
+               {% endfor %}
+            </li>
+            <li>
+               <a href="#">{{post.autor}}</a>
+            </li>
+            <li>
+               <a href="#">{{post.materia}}</a>
+            </li>
+         </ul>
+         <p class="excert">
+            {{ post.contenido|safe }}
+         </p>
+      </div>
+   </div>
+</div>
+{% endblock post %}

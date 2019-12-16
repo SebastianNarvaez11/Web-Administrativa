@@ -1,0 +1,42 @@
+{% extends 'core/about.html' %}
+{% load static %}
+
+
+{% block titulo %}
+Academico | PDI
+{% endblock titulo %}
+
+{% block titulobaner %}
+PDI
+{% endblock titulobaner %}
+
+{% block body %}
+<!--================Blog Area =================-->
+<section class="blog_area section_padding">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <p>MATERIAL DIDACTICO</p>
+                    <h2>Grados</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {%for grado in grado_list%}
+            <div class="col-lg-3 mb-5">
+                <a href="{% url 'pdi_urldash:materias' grado.id %}">
+                    <img src="{{grado.imagen.url}}" class="capa imagen" alt="...">
+                    <div class="d-flex align-items-end justify-content-end">
+                        <h5 id="grado">{{grado.numeracion}}°</h5>
+                    </div>
+                </a>
+
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</section>
+{% endblock body %}

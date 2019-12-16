@@ -1,0 +1,110 @@
+{% extends 'dash/base.html' %}
+{% load static %}
+{% block titulo %} Academico | Servicios {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        Actualizar Servicio
+                    </div>
+                    <div class="dropdown-divider"></div>
+
+                    <form method="POST" class="user" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="titulo"
+                                    id="id_titulo" placeholder="Titulo" value="{{service.titulo}}" maxlength="20">
+                                <small class="text-danger"> {{ form.titulo.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="descripcion"
+                                    id="id_descripcion" placeholder="Descripcion" value="{{service.descripcion}}" maxlength="50">
+                                <small class=" text-danger"> {{ form.descripcion.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                <div class="django-ckeditor-widget" data-field-id="id_contenido"
+                                    style="display: inline-block;">
+                                    <textarea class="form-control" cols="40" id="id_contenido" name="contenido"
+                                        rows="10" required data-processed="0"
+                                        data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;Full&quot;, &quot;height&quot;: 291, &quot;width&quot;: 835, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;language&quot;: &quot;es-co&quot;}"
+                                        data-external-plugin-resources="[]" data-id="id_contenido"
+                                        data-type="ckeditortype">{{service.contenido}}</textarea>
+                                </div>
+                            </div>
+                            <small class=" text-danger"> {{ form.contenido.errors }}</small>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-3 col-lg-3">
+                                <input type="number" class="form-control form-control-user" required name="mensualidad"
+                                    id="id_mensualidad" placeholder="Mensualidad" value="{{service.mensualidad}}">
+                                <small class="text-danger"> {{ form.mensualidad.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-3 col-lg-3">
+                                <input type="number" class="form-control form-control-user" required name="matricula"
+                                    id="id_matricula" placeholder="Matricula" value="{{service.matricula}}">
+                                <small class="text-danger"> {{ form.matricula.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" name="jornada" id="id_jornada"
+                                    placeholder="Jornada"
+                                    value="{% if form.jornada.value %}{{service.jornada}}{%endif%}" maxlength="80">
+                                <small class="text-danger"> {{ form.jornada.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                <div class="custom-control custom-checkbox small">
+                                    <input type="checkbox" class="custom-control-input" name="index" id="id_index"
+                                        {% if service.index %} checked {% endif %}>
+                                    <label class="custom-control-label" for="id_index">¿ Mostrar en el inicio ?</label>
+                                </div>
+                                <div class="custom-control custom-checkbox small">
+                                    <input type="checkbox" class="custom-control-input" name="estado" id="id_estado"
+                                        {% if service.estado %} checked {% endif %}>
+                                    <label class="custom-control-label" for="id_estado">Publicado/Oculto:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-12 col-mb-12">
+                                <p><label for="id_imagen">Seleccione una imagen:</label>
+                                    <input type="file" name="imagen" accept="image/*" id="id_imagen"></p>
+                                </p>
+                                <small class="text-danger"> {{ form.imagen.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-12 col-mb-12">
+                                <div class="contenedor">
+                                    <a href="{{ service.imagen.url }}">
+                                        <img src="{{ service.imagen.url }}" class="imagen rounded border-left-primary"
+                                            alt="...">
+                                    </a>
+                                    <br> Imagen Actual
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success">Actualizar</button>
+                                <a href="{% url 'services_dash:list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

@@ -1,0 +1,93 @@
+{% extends 'dash/base.html' %}
+{% load static %}
+{% block titulo %} Academico | Blog {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        Actualizar Post
+                    </div>
+                    <div class="dropdown-divider"></div>
+
+
+                    <form method="POST" class="user" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="titulo"
+                                    id="id_titulo" placeholder="Titulo" value="{{post.titulo}}" maxlength="200">
+                                <small class="text-danger"> {{ form.titulo.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="descripcion"
+                                    id="id_descripcion" placeholder="Descripcion" value="{{post.descripcion}}"
+                                    maxlength="500">
+                                <small class="text-danger"> {{ form.descripcion.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                <div class="django-ckeditor-widget" data-field-id="id_contenido"
+                                    style="display: inline-block;">
+                                    <textarea class="form-control" cols="40" id="id_contenido" name="contenido"
+                                        rows="10" required data-processed="0"
+                                        data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;Full&quot;, &quot;height&quot;: 291, &quot;width&quot;: 835, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;language&quot;: &quot;es-co&quot;}"
+                                        data-external-plugin-resources="[]" data-id="id_contenido"
+                                        data-type="ckeditortype">{{post.contenido}}</textarea>
+                                </div>
+                            </div>
+                            <small class=" text-danger"> {{ form.contenido.errors }}</small>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-12 col-mb-12">
+                                {{form.imagen}}
+                                <small class="text-danger"> {{ form.imagen.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-12 col-mb-12">
+                                <div class="contenedor">
+                                    <a href="{{ post.imagen.url }}">
+                                        <img src="{{ post.imagen.url }}" class="imagen rounded border-left-primary"
+                                            alt="...">
+                                    </a>
+                                    <br> Imagen Actual
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="form-group col-xl-3 col-lg-3">
+                                <p><label for="id_categoria">Selecciones las Categorias:</label>
+                                    {{form.categoria}}
+                            </div>
+                            <div class="form-group col-xl-3 col-lg-3">
+                                <p><label for="id_categoria">Asignatura relacionada:</label>
+                                    {{form.materia}}
+                            </div>
+                            <div class="form-group col-xl-3 col-lg-3">
+                                <p><label for="id_grado">Grado para quien va dirigido:</label>
+                                    {{form.grado}}
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success">Actualizar</button>
+                                <a href="{% url 'post_dash:list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--
+                    {{form.as_p}}
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

@@ -1,0 +1,71 @@
+{% extends 'core/about.html' %}
+{% load static %}
+
+{% block titulo %}
+Academico | Docentes
+{% endblock titulo %}
+
+{% block titulobaner %}
+Docentes
+{% endblock titulobaner %}
+
+
+{% block body %}
+
+
+<!--::servicios::-->
+<section class="blog_part section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <p>Nuestro equipo</p>
+                    <h2>Docentes</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                {% for docente in docentes %}
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 d-flex pt-4">
+                    <div class="card flex-fill border contcard" style="width: 18rem;">
+                        <div class="contenedor">
+                            <img src="{{ docente.imagen.url }}" class="card-img-top imagen" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title titulo">{{docente.nombre}} {{docente.apellido}}</h3>
+                            <p class="card-text mt-3">
+                                {{docente.informacion}}
+                            </p>
+
+                        </div>
+                        <div class="dropdown dropup">
+                            <button class="btn btn-outline-primary dropdown-toggle menu" type="button"
+                                id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu menu bg-white" aria-labelledby="dropdownMenu2">
+                                <h6 class="dropdown-header text-center">informacion adicional.</h6>
+                                <div class="container">
+                                    <p>
+                                        <p class="text-primary"> Grados:</p>
+                                    </p>
+                                    {% for grado in docente.grados.all %}{{grado.numeracion}}°{% if not forloop.last %},
+                                    {% endif %}{% endfor%}</p>
+                                    <p>
+                                        <p class="text-primary"> Asignaturas:</p>
+                                        {% for materia in docente.materias.all %}{{materia.nombre}}{% if not forloop.last %},
+                                        {% endif %}{% endfor%}
+                                    </p><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--::fin servicios::-->
+
+{% endblock body %}

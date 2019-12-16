@@ -1,0 +1,61 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <form action="{% url 'user_urldash:update' %}" role="form" class="user" method="POST">
+            {% csrf_token %}
+            <div class="modal-header border-bottom-warning">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar Datos</h5>
+                <i class="fas fa-user-plus fa-2x text-gray-300"></i>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <small class="text-danger mb-3">
+                        {% if form.errors %}
+                        {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                        {{error|escape }}
+                        {% endfor %}
+                        {% endif %}
+                        {% endif %}
+                    </small>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" name="username" maxlength="150" autofocus
+                        required id="id_username" placeholder="Nombre de Usuario"
+                        value="{% if form.username.value %}{{form.username.value}}{%endif%}">
+                    <small class="text-danger"> {{ form.username.errors }}</small>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user" required name="first_name"
+                            id="id_first_name" placeholder="Nombres"
+                            value="{% if form.first_name.value %}{{form.first_name.value}}{%endif%}">
+                        <small class="text-danger"> {{ form.first_name.errors }}</small>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" name="last_name"
+                            id="id_last_name" placeholder="Apellidos"
+                            value="{% if form.last_name.value %}{{form.last_name.value}}{%endif%}">
+                    </div>
+                    <small class="text-danger"> {{ form.last_name.errors }}</small>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-user" required name="email" maxlength="254"
+                        id="id_email" placeholder="Email"
+                        value="{% if form.email.value %}{{form.email.value}}{%endif%}">
+                    <small class="text-danger"> {{ form.email.errors }}</small>
+                </div>
+            </div>
+            <div class="modal-footer border-bottom-warning">
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+                        <a href="#" onclick="return cerrar_modal()" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

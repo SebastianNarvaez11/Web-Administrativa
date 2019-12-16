@@ -1,0 +1,56 @@
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+        <form action="{% url 'user_urldash:update_permission' user.id%}" role="form" class="user" method="POST">
+            {% csrf_token %}
+            <div class="modal-header border-bottom-warning">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar Permisos</h5>
+                <i class="fas fa-key fa-2x text-gray-300 "></i>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <small class="text-danger mb-3">
+                        {% if form.errors %}
+                        {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                        {{error|escape }}
+                        {% endfor %}
+                        {% endif %}
+                        {% endif %}
+                    </small>
+                </div>
+                <div class="row ">
+                    <div class="form-group col-xl-12 col-lg-12">
+                        <div class="custom-control custom-checkbox small">
+                            <input type="checkbox" class="custom-control-input" name="is_active" id="id_is_active"
+                                {% if user.is_active %} checked {% endif %}>
+                            <label class="custom-control-label" for="id_is_active">Activo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+                        Permisos del usuario:
+                        {{form.groups}}
+                    </div>
+                </div>
+                <small class="text-danger"> {{ form.username.errors }}</small>
+                <small class="text-danger"> {{ form.first_name.errors }}</small>
+                <small class="text-danger"> {{ form.last_name.errors }}</small>
+                <small class="text-danger"> {{ form.email.errors }}</small>
+                <small class="text-danger"> {{ form.password1.errors }}</small>
+                <small class="text-danger"> {{ form.password2.errors }}</small>
+
+            </div>
+            <div class="modal-footer border-bottom-warning">
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+                        <a href="#" onclick="return cerrar_modal()" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

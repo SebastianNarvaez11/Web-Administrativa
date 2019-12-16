@@ -1,0 +1,80 @@
+{% extends 'dash/base.html' %}
+{% block titulo %} Academico | Login {% endblock titulo %}
+{% block sidebar %}{% endblock sidebar %}
+{% block top_bar %}{% endblock top_bar %}
+{% block contenido %}{% endblock contenido %}
+{% block login %}
+<div class="container">
+
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+
+    <div class="col-xl-12 col-lg-12 col-md-9">
+
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
+                </div>
+
+                <form class="user" method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input required type="text" class="form-control form-control-user" id="id_username" name="username"
+                      placeholder="Usuario" value="{% if form.username.value %}{{form.username.value}}{%endif%}">
+                    <small class="text-danger"> {{ form.username.errors }}</small>
+                  </div>
+                  <div class="form-group">
+                    <input required type="password" class="form-control form-control-user" id="id_password" name="password"
+                      placeholder="Constraseña" value="{% if form.password.value %}{{form.password.value}}{%endif%}">
+                    <small class="text-danger"> {{ form.password.errors }}</small>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Acceder
+                  </button>
+                  <hr>
+                </form>
+
+                <hr>
+                <div class="text-center">
+                  <a class="small" href="{% url 'password_reset' %}">¿Olvidaste Tu Contraseña?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock login %}
+{% block footer %}{% endblock footer %}
+{% block js %}
+<script>
+  {% if form.errors %}
+
+  {% for field in form %}
+  {% if field.errors %}
+  {% for error in field.errors %}
+  mensaje('{{ error|escape }}', 'error');
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+
+  {% if form.non_field_errors %}
+  {% for error in form.non_field_errors %}
+  mensaje('{{ error|escape }}', 'error');
+  {% endfor %}
+  {% endif %}
+  {% endif %}
+</script>
+
+{% endblock js %}

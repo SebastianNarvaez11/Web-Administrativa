@@ -1,0 +1,99 @@
+{% extends 'dash/base.html'%}
+{% load static %}
+{% block titulo %} Academico | Perfil {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+            <h2>Perfil</h2>
+            <div class="dropdown-divider"></div>
+            <form method="POST" class="user" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row ">
+                    <div class="form-group col-xl-3 col-lg-3 col-mb-12 d-flex justify-content-center">
+                        <div class="contenedor">
+                            {% if request.user.profile.imagen %}
+                            <a href="{{ profile.imagen.url }}">
+                                <img src="{{ profile.imagen.url }}" class="foto rounded border-left-primary" alt="...">
+                            </a>
+                            {%else%}
+                            <a>
+                                <img src="{% static 'registration/img/no-avatar.jpg'%}"
+                                    class="foto rounded border-left-primary" alt="...">
+                            </a>
+                            {% endif %}
+                            <br> Imagen Actual
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 align-middle">
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                Seleccione una foto:
+                                <br>
+                                <input type="file" name="imagen" class="form-control-file mt-3" id="id_imagen">
+                                <small class="text-danger"> {{ form.imagen.errors }}</small>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                <input type="text" class="form-control form-control-user" name="info" id="id_info"
+                                    placeholder="Informacion" value="{% if form.info.value %}{{profile.info}}{% endif%}"
+                                    maxlength="300">
+                                <small class="text-danger"> {{ form.info.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                <input type="url" class="form-control form-control-user" name="link" id="id_link"
+                                    placeholder="Url de su sitio web"
+                                    value="{% if form.link.value %}{{link.info}}{% endif%}" maxlength="300">
+                                <small class="text-danger"> {{ form.link.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_username" style="font-size: 14px;line-height: 5px;">Nombre de
+                                Usuario:</label>
+                            <input readonly type="text" class="form-control form-control-user" name="username"
+                                maxlength="150" autofocus required id="id_username" value="{{request.user.username}}">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 mb-2">
+                                <label for="id_first_name" style="font-size: 14px;line-height: 5px;">Nombres:</label>
+                                <input readonly type="text" class="form-control form-control-user" required
+                                    name="first_name" id="id_first_name" value="{{request.user.first_name}}">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="id_last_name" style="font-size: 14px;line-height: 5px;">Apellidos:</label>
+                                <input readonly type="text" class="form-control form-control-user" required
+                                    name="last_name" id="id_last_name" value="{{request.user.last_name}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_email" style="font-size: 14px;line-height: 5px;">Email:</label>
+                            <input readonly type="email" class="form-control form-control-user" required name="email"
+                                maxlength="254" id="id_email" value="{{request.user.email}}">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" onclick="return abrir_modal('{% url 'user_urldash:update' %}')">
+                                <i class="far fa-edit"></i> Editar Informacion Personal</a>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row mb-5">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success btn-block">Actualizar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+{% block footer %}{% endblock footer %}
