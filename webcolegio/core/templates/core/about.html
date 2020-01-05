@@ -47,9 +47,6 @@ Academico | Quienes Somos
                             <li class="nav-item {% if request.path|slice:":5" == '/pdi/' %}active{% endif %}">
                                 <a class="nav-link" href="{% url 'pdi_urldash:pdi' %}">PDI</a>
                             </li>
-                            <li class="nav-item {% if request.path|slice:":6" == '/blog/' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'blog' %}">Blog</a>
-                            </li>
                             <li class="nav-item {% if request.path == '/contact/' %}active{% endif %}">
                                 <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
                             </li>
@@ -92,7 +89,7 @@ Academico | Quienes Somos
         <div class="row align-items-sm-center align-items-lg-stretch">
             <div class="col-md-7 col-lg-7">
                 <div class="learning_img">
-                    <img src="{% static 'core/img/fotos/foto15.jpeg' %}" class="rounded" alt="">
+                    <img src="{% static 'core/img/fotos/foto15.png' %}" class="rounded" alt="">
                 </div>
             </div>
             <div class="col-md-5 col-lg-5">

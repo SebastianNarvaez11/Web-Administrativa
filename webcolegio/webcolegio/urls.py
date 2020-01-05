@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from services.urls import services_urldash
-from blog.urls import category_urldash, post_urldash, pdi_urldash
+from pdi.urls import category_urldash, post_urldash, pdi_urldash
 from docentes.urls import materia_urldash, docente_urldash
 from core.urls import colegio_urldash, grado_urldash
 from social.urls import link_urldash
@@ -30,8 +30,6 @@ urlpatterns = [
     path('dashboard/', include('dash.urls')),
     path('dashboard/colegio/', include(colegio_urldash)),
     path('dashboard/grados/', include(grado_urldash)),
-    # url de la app blog
-    path('blog/', include('blog.urls')),
     path('dashboard/category/', include(category_urldash)),
     path('dashboard/post/', include(post_urldash)),
     # url pdi

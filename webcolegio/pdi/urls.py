@@ -4,7 +4,6 @@ from .views import CategoryListView, CategoryCreateView, CategoryUpdateView, Pos
 
 urlpatterns = [
     path('', views.blog, name='blog'),
-    path('<slug:slug_post>/', views.detallepost, name='detallepost'),
 ]
 
 category_urldash = ([
@@ -23,4 +22,5 @@ pdi_urldash = ([
     path('', pdiListView.as_view(), name='pdi'),
     path('materias/<int:id_grado>/', views.materias, name='materias'),
     path('post/<int:id_materia>/<int:id_grado>/', views.postMateria, name='posts_materias'),
+    path('post/<slug:slug_post>/', views.detallepost, name='detallepost'),
 ], 'pdi_urldash')

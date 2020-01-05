@@ -1,12 +1,12 @@
 {% extends 'dash/base.html' %}
 {% load static %}
-{% block titulo %} Academico | Blog {% endblock titulo %}
+{% block titulo %} Academico | Pdi {% endblock titulo %}
 {% block contenido %}
 <div class="container">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Lista De Post</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Lista De Categorias</h6>
             <div class="dropdown no-arrow">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -14,9 +14,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                     aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Gestionar Post</div>
-                    <a class="dropdown-item" href="{% url 'post_dash:create' %}">
-                        Nuevo <i class="fas fa-plus"></i>
+                    <div class="dropdown-header">Gestionar Categorias</div>
+                    <a class="dropdown-item" href="#"
+                        onclick="return abrir_modal('{% url 'category_dash:create' %}')">
+                        Nueva <i class="fas fa-plus"></i>
                     </a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <div class="dropdown-divider"></div>
@@ -26,37 +27,31 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                {% if not post_list %}
+                {% if not category_list %}
                 <div class="alert alert-info" role="alert">
-                    No hay post para mostrar
+                    No hay categorias para mostrar
                 </div>
                 {% else %}
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Categorias</th>
-                            <th scope="col">Autor</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">Creacion</th>
                             <th scope="col">Edicion</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for post in post_list %}
+                        {% for category in category_list %}
                         <tr>
-                            <th scope="row">{{post.id}}</th>
-                            <td>{{post.titulo}}</td>
-                            <td>
-                                {% for categoria in post.categoria.all %}
-                                {{categoria.nombre}} {% if not forloop.last %},{%endif%}
-                                {%endfor%}
-                            </td>
-                            <td>{{post.autor}}</td>
-                            <td>{{post.creacion|date:"d/m/y"}}</td>
-                            <td>{{post.edicion|date:"d/m/y"}}</td>
-                            <td><a href="{% url 'post_dash:update' post.id %}" class="btn btn-warning btn-circle">
+                            <th scope="row">{{category.id}}</th>
+                            <td>{{category.nombre}}</td>
+                            <td>{{category.creacion|date:"d/m/y"}}</td>
+                            <td>{{category.edicion|date:"d/m/y"}}</td>
+                            <td><a href="#"
+                                    onclick="return abrir_modal('{% url 'category_dash:update' category.id %}')"
+                                    class="btn btn-warning btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="#" class="btn btn-danger btn-circle">

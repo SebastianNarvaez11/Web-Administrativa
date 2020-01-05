@@ -3,15 +3,17 @@
 
 
 {% block titulo %}
-Academico | Post
+Academico | Pdi
 {% endblock titulo %}
 
 {% block titulobaner %}
 <div class="text-center d-flex justify-content-center">
     {{grado.nombre}} - {{grado.numeracion}}°
 </div>
-
 {% endblock titulobaner %}
+
+
+
 
 {% block body %}
 <div class="row justify-content-center mt-5">
@@ -21,6 +23,9 @@ Academico | Post
         </div>
     </div>
 </div>
+
+
+
 <!--================Blog Area =================-->
 <section class="blog_area section_padding pt-2">
     <div class="container">
@@ -30,16 +35,16 @@ Academico | Post
                 <div class="blog_left_sidebar">
                     <article class="blog_item border">
                         <div class="blog_item_img">
-                            <a href="{% url 'detallepost' post.slug %}">
+                            <a href="{% url 'pdi_urldash:detallepost' post.slug %}">
                                 <img class="card-img rounded-0" src="{{ post.imagen.url }}" alt="">
                             </a>
-                            <a href="{% url 'detallepost' post.slug %}" class="blog_item_date text-center">
+                            <a href="{% url 'pdi_urldash:detallepost' post.slug %}" class="blog_item_date text-center">
                                 <h3>{{ post.publicacion|date:"d" }}</h3>
                                 <p>{{ post.publicacion|date:"M" }}</p>
                             </a>
                         </div>
                         <div class="blog_details">
-                            <a class="d-inline-block" href="{% url 'detallepost' post.slug %}">
+                            <a class="d-inline-block" href="{% url 'pdi_urldash:detallepost' post.slug %}">
                                 <h2>{{ post.titulo }}</h2>
                             </a>
                             <p>{{ post.descripcion }}</p>

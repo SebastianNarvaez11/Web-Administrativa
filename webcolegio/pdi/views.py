@@ -28,7 +28,7 @@ def blog(request):
 
     categorias = Category.objects.all()
     grados = Grado.objects.all()
-    return render(request, 'blog/blog.html', {'lista_posts': lista_posts, 'categorias': categorias, 'posts': posts, 'grados': grados})
+    return render(request, 'pdi/blog.html', {'lista_posts': lista_posts, 'categorias': categorias, 'posts': posts, 'grados': grados})
 
 
 def detallepost(request, slug_post):
@@ -36,7 +36,7 @@ def detallepost(request, slug_post):
     posts = Post.objects.all()
     categorias = Category.objects.all()
     grados = Grado.objects.all()
-    return render(request, 'blog/detallepost.html', {'post': post, 'lista_posts': posts, 'categorias': categorias, 'grados': grados})
+    return render(request, 'pdi/detallepost.html', {'post': post, 'lista_posts': posts, 'categorias': categorias, 'grados': grados})
 
 
 def postMateria(request, id_materia, id_grado):
@@ -48,24 +48,24 @@ def postMateria(request, id_materia, id_grado):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
-    return render(request, 'blog/blog_filter.html', {'posts': posts, 'grado': grado, 'materia': materia})
+    return render(request, 'pdi/pdi_filter.html', {'posts': posts, 'grado': grado, 'materia': materia})
 
 
 def materias(request, id_grado):
     grado = get_object_or_404(Grado, id=id_grado)
-    return render(request, 'blog/materias.html', {'grado': grado})
+    return render(request, 'pdi/materias.html', {'grado': grado})
 
 
 ######## Vistas Del Dashboard Categoria #########################
 @method_decorator(login_required, name='dispatch')
 class CategoryListView(SinPermisos, ListView):
-    permission_required = 'blog.view_category'
+    permission_required = 'pdi.view_category'
     model = Category
 
 
 @method_decorator(login_required, name='dispatch')
 class CategoryCreateView(SinPermisos, CreateView):
-    permission_required = 'blog.add_category'
+    permission_required = 'pdi.add_category'
     model = Category
     form_class = CategoryForm
     success_message = "Categoria creada satisfactoriamente"
@@ -74,7 +74,7 @@ class CategoryCreateView(SinPermisos, CreateView):
 
 @method_decorator(login_required, name='dispatch')
 class CategoryUpdateView(SinPermisos, UpdateView):
-    permission_required = 'blog.change_category'
+    permission_required = 'pdi.change_category'
     model = Category
     form_class = CategoryForm
     template_name_suffix = '_update_form'
@@ -94,7 +94,7 @@ class PostListView(ListView):
 
 @method_decorator(login_required, name='dispatch')
 class PostCreateView(SinPermisos, CreateView):
-    permission_required = 'blog.add_post'
+    permission_required = 'pdi.add_post'
     model = Post
     form_class = PostForm
     success_url = reverse_lazy('post_dash:list')
@@ -107,7 +107,7 @@ class PostCreateView(SinPermisos, CreateView):
 
 @method_decorator(login_required, name='dispatch')
 class PostUpdateView(SinPermisos, UpdateView):
-    permission_required = 'blog.change_post'
+    permission_required = 'pdi.change_post'
     model = Post
     form_class = PostForm
     template_name_suffix = '_update_form'
@@ -125,4 +125,4 @@ class PostUpdateView(SinPermisos, UpdateView):
 
 class pdiListView(ListView):
     model = Grado
-    template_name = 'blog/homepdi.html'
+    template_name = 'pdi/homepdi.html'
