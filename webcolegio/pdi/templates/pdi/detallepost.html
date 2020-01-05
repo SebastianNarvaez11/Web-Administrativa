@@ -1,24 +1,46 @@
-{% extends 'pdi/blog.html' %}
+{% extends 'core/about.html' %}
 {% load static %}
 
 
 {% block titulo %}
-Academico | Blog
+Academico | Pdi
 {% endblock titulo %}
 
-{% block titulobaner %}
-{{ post.titulo }}
-{% endblock titulobaner %}
+{% block baner%}
 
+<style>
+   .breadcrumb_bg {
+      background-image: url("{{ post.imagen.url }}");
+   }
 
-{% block post%}
+   .breadcrumb_bg:not(div) {
+      filter: blur(3px);
+   }
+</style>
+
+<section class="breadcrumb breadcrumb_bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="breadcrumb_iner text-center">
+               <div class="breadcrumb_iner_item">
+                  <h2>{% block titulobaner %} {{ post.titulo }} {% endblock titulobaner %}</h2>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock baner %}
+
+{% block body%}
 <div class="posts-list">
    <div class="single-post">
-      <div class="feature-img">
-         <img class="img-fluid" src="{{ post.imagen.url }}" alt="">
-      </div>
       <div class="blog_details">
-         <h2>{{post.descripcion}}</h2>
+         <p class="excert">
+            {{ post.contenido|safe }}
+         </p>
          <ul class="blog-info-link mt-3 mb-4">
             <li>
                {% for categoria in post.categoria.all %}
@@ -33,10 +55,7 @@ Academico | Blog
                <a href="#">{{post.materia}}</a>
             </li>
          </ul>
-         <p class="excert">
-            {{ post.contenido|safe }}
-         </p>
       </div>
    </div>
 </div>
-{% endblock post %}
+{% endblock body %}

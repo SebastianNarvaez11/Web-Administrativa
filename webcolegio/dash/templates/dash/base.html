@@ -121,23 +121,23 @@
       <hr class="sidebar-divider ">
       {% endif %}
 
-      {% if perms.blog.view_post%}
+      {% if perms.pdi.view_post%}
       <div class="sidebar-heading">
-        Blog
+        Pdi
       </div>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item ">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategory"
           aria-expanded="true" aria-controls="collapseCategory">
           <i class="fas fa-blog"></i>
-          <span>Blog</span>
+          <span>Pdi</span>
         </a>
         <div id="collapseCategory" class="collapse 
           {% if request.path|slice:":16" == '/dashboard/post/' %}show
           {% elif request.path|slice:":20" == '/dashboard/category/' %}show {% endif%} "
           aria-labelledby="headingCategory" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            {% if perms.blog.view_category %}
+            {% if perms.pdi.view_category %}
             <a class="collapse-item {% if request.path|slice:":20" == '/dashboard/category/' %}active{% endif %}"
               href="{% url 'category_dash:list' %}"><i class="far fa-bookmark"></i> -
               Categorias</a>
