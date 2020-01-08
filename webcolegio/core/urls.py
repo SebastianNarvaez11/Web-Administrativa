@@ -1,6 +1,6 @@
 from django.urls import path
 from .import views
-from .views import ColegioUpdateCreate, ColegioUpdateView, GradosListView, GradoCreateView, GradoUpdateView
+from .views import ColegioUpdateCreate, ColegioUpdateView, GradosListView, GradoCreateView, GradoUpdateView, GradoDeleteView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -15,5 +15,6 @@ colegio_urldash = ([
 grado_urldash = ([
     path('list/', GradosListView.as_view(), name='list'),
     path('create/', GradoCreateView.as_view(), name='create'),
-    path('update/<int:pk>', GradoUpdateView.as_view(), name='update'),
+    path('update/<int:pk>/', GradoUpdateView.as_view(), name='update'),
+    path('delete/<int:pk>/', GradoDeleteView.as_view(), name='delete'),
 ], 'grado_urldash')

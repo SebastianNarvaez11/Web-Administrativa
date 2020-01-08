@@ -40,7 +40,7 @@ class Post(models.Model):
     # autor enlazado con los autores de django
     autor = models.ForeignKey(User, verbose_name='Autor', on_delete=models.CASCADE)
     categoria = models.ManyToManyField(Category, verbose_name='Categoria', related_name="obtener_posts")
-    grado = models.ForeignKey(Grado, verbose_name='Grado', on_delete=models.CASCADE, blank=True, null=True, related_name="obtener_posts")
+    grado = models.ForeignKey(Grado, verbose_name='Grado', on_delete=models.SET_NULL, blank=True, null=True, related_name="obtener_posts")
     materia = models.ForeignKey(Materia, verbose_name='Materia', on_delete=models.CASCADE, blank=True, null=True, related_name="obtener_posts")
     slug = models.SlugField('Slug/Url')
     publicacion = models.DateField('Fecha de publicacion', default = now)

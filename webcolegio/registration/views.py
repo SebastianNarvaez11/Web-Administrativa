@@ -91,8 +91,10 @@ class UserDeleteView(SinPermisos, DeleteView):
 
     # Toca meterle esto devido a un error en django
     def delete(self, request, *args, **kwargs):
-        user = self.get_object()
-        user.profile.imagen.delete()
+        usuario = self.get_object()
+        #crea o llama un perfil para que no de error al elimanarle la foto 
+        profile, create = Profile.objects.get_or_create(user=usuario)
+        usuario.profile.imagen.delete()
         messages.success(self.request, self.success_message)
         return super(UserDeleteView, self).delete(request, *args, **kwargs)
 

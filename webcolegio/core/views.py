@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from .models import Colegio, Grado
 from .forms import ColegioForm, GradoForm
 from services.models import Service
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from dash.views import SinPermisos
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 # Create your views here.
 
@@ -74,3 +75,18 @@ class GradoUpdateView(SinPermisos, UpdateView):
     template_name_suffix = '_update_form'
     success_message = 'Grado actualizado satisfactoriamente'
     success_url = reverse_lazy('grado_urldash:list')
+
+
+@method_decorator(login_required, name='dispatch')
+class GradoDeleteView(SinPermisos, DeleteView):
+    permission_required = 'core.delete_grado'
+    model = Grado
+    success_url = reverse_lazy('grado_urldash:list')
+    success_message = 'El grado se elimino satisfactoriamente'
+
+    # Toca meterle esto devido a un error en django
+    def delete(self, request, *args, **kwargs):
+        grado = self.get_object()
+        grado.imagen.delete()
+        messages.success(self.request, self.success_message)
+        return super(GradoDeleteView, self).delete(request, *args, **kwargs)
