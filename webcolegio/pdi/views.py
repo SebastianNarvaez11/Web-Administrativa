@@ -7,9 +7,10 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from dash.views import SinPermisos
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import CategoryForm, PostForm
 from django.urls import reverse_lazy
+from django.contrib import messages
 # Create your views here.
 
 
@@ -121,6 +122,22 @@ class PostUpdateView(SinPermisos, UpdateView):
     def form_valid(self, form):
         form.instance.autor = self.request.user
         return super().form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class PostDeleteView(SinPermisos, DeleteView):
+    permission_required = 'pdi.delete_post'
+    model = Post
+    success_url = reverse_lazy('post_dash:list')
+    success_message = "Post eliminado satisfactoriamente"
+
+
+    #Toca meterle esto devido a un error en django
+    def delete(self, request, *args, **kwargs):
+        post = self.get_object()
+        post.imagen.delete()
+        messages.success(self.request, self.success_message)
+        return super(PostDeleteView, self).delete(request, *args, **kwargs)
 
 
 class pdiListView(ListView):

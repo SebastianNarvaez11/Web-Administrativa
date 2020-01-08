@@ -59,7 +59,8 @@
                             <td><a href="{% url 'post_dash:update' post.id %}" class="btn btn-warning btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-circle">
+                                <a href="#" onclick=" return abrir_modal('{% url 'post_dash:delete' post.id %}')"
+                                    class="btn btn-danger btn-circle">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>

@@ -12,6 +12,7 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 def login(request):
@@ -35,7 +36,6 @@ def login(request):
                 do_login(request, user)
                 # Y le redireccionamos a la portada
                 return redirect('home')
-        
 
     # Si llegamos al final renderizamos el formulario
     return render(request, "registration/login.html", {'form': form})
@@ -57,6 +57,13 @@ class SignUpView(SinPermisos, CreateView):
         for grupo in grupos:
             user.groups.add(grupo)
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
 
 
 @method_decorator(login_required, name='dispatch')
