@@ -131,7 +131,6 @@ class PostDeleteView(SinPermisos, DeleteView):
     success_url = reverse_lazy('post_dash:list')
     success_message = "Post eliminado satisfactoriamente"
 
-
     #Toca meterle esto devido a un error en django
     def delete(self, request, *args, **kwargs):
         post = self.get_object()

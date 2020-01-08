@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import UserForm, UserPermisionForm, UserUpdateForm, LoginForm, ProfileForm
 from django.contrib.auth.models import User, Permission
 from .models import Profile
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django import forms
 from django.contrib.auth.decorators import login_required
@@ -79,6 +79,22 @@ class UserUpdateView(SinPermisos, UpdateView):
     def get_object(self):
         user = self.request.user
         return user
+
+
+@method_decorator(login_required, name='dispatch')
+class UserDeleteView(SinPermisos, DeleteView):
+    permission_required = 'registration.delete_user'
+    model = User
+    template_name = 'registration/user_confirm_delete.html'
+    success_url = reverse_lazy('user_urldash:list')
+    success_message = 'Usuario eliminado satisfactoriamente'
+
+    # Toca meterle esto devido a un error en django
+    def delete(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.profile.imagen.delete()
+        messages.success(self.request, self.success_message)
+        return super(UserDeleteView, self).delete(request, *args, **kwargs)
 
 
 class UserPermisionUpdateView(SinPermisos, UpdateView):

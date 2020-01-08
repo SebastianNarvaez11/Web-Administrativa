@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SignUpView, UsuarioListView, UserPermisionUpdateView, ProfileUpdateView, UserUpdateView, login
+from .views import SignUpView, UsuarioListView, UserPermisionUpdateView, ProfileUpdateView, UserUpdateView, login, UserDeleteView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
 user_urldash = ([
     path('list/', UsuarioListView.as_view(), name='list'),
     path('update/', UserUpdateView.as_view(), name='update'),
+    path('delete/<int:pk>/', UserDeleteView.as_view(), name='delete'),
     path('update_permission/<int:pk>/', UserPermisionUpdateView.as_view(), name='update_permission'),
 ], 'user_urldash')
