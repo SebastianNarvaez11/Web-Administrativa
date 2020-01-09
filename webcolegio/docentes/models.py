@@ -1,9 +1,10 @@
 from django.db import models
+from core.validators import *
 # Create your models here.
 
 
 class Materia(models.Model):
-    nombre = models.CharField('Nombre', max_length=200)
+    nombre = models.CharField('Nombre', max_length=20,validators=[validate_only_letters])
     creacion = models.DateField('Fecha de creacion', auto_now_add=True)
     edicion = models.DateField('Fecha de edicion', auto_now=True)
 

@@ -1,6 +1,6 @@
 <div class="modal-dialog ">
     <div class="modal-content">
-        <form action="{% url 'grado_urldash:update' grado.id %}" enctype="multipart/form-data" role="form"
+        <form id="formulario" action="{% url 'grado_urldash:update' grado.id %}" enctype="multipart/form-data" role="form"
             method="POST">
             {% csrf_token %}
             <div class="modal-header border-bottom-warning">
@@ -59,3 +59,49 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(function () {
+
+        var url = $('#formulario').attr("action");
+        var token = jQuery("[name=csrfmiddlewaretoken]").val();
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+
+            //toca hacerlo sin el serealizeArray porque no captura la imagen
+            var form = $('#formulario')[0];
+            var formData = new FormData(form);
+
+            $.ajax({
+                url: url,
+                method: "POST",
+                headers: { 'X-CSRFToken': token },
+                processData: false,
+                contentType: false,
+                data: formData,
+            })
+                .done(function (r, textStatus, xhr) {
+                    if (xhr.status = 200) {
+                        cerrar_modal()
+                        setTimeout('document.location.reload()', 1000);
+                        mensaje('Grado actualizado satisfactoriamente', 'success');
+                    }
+                    else {
+                        mensaje(textStatus, 'error');
+                    }
+                }).fail(function (error) {
+                    var r = error.responseJSON
+                    for (var clave in r) {
+                        // Controlando que json realmente tenga esa propiedad
+                        if (r.hasOwnProperty(clave)) {
+                            // Mostrando en pantalla la clave junto a su valor
+                            var input = 'id_' + String(clave);
+                            document.getElementById(input).style.borderColor = "red";
+                            mensaje(String(r[clave]), 'error')
+                        }
+                    }
+                })
+        })
+    });
+</script>

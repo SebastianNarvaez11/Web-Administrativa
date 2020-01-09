@@ -8,7 +8,6 @@ class MateriaForm(ModelForm):
         model = Materia
         fields = ['nombre']
 
-
 class DocenteForm(ModelForm):
 
     class Meta:
