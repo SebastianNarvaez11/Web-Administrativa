@@ -32,10 +32,9 @@ class UserUpdateForm(UserChangeForm):
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
-        if User.objects.filter(email=email).exists():
-            user = User.objects.get(email=email)
-            username = self.cleaned_data.get("username")
-            if not user.username == username:
+        #comprobamos si el campo email se ah modificado
+        if 'email' in self.changed_data:
+            if User.objects.filter(email=email).exists():
                 raise forms.ValidationError(
                     "El email ya existe, prueba con otro")
 
@@ -49,12 +48,10 @@ class UserPermisionForm(UserChangeForm):
         fields = ['groups', 'is_active']
 
 
-
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['imagen', 'info', 'link']
-
 
 
 class LoginForm(AuthenticationForm):
@@ -62,7 +59,7 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ["username", "password"]
-    
+
     def clean_username(self):
         username = self.cleaned_data.get("username")
         if User.objects.filter(username=username).exists():

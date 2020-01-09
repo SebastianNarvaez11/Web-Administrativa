@@ -1,6 +1,7 @@
 <div class="modal-dialog ">
     <div class="modal-content">
-        <form action="{% url 'grado_urldash:create' %}" enctype="multipart/form-data" role="form" method="POST">
+        <form id="formulario" action="{% url 'grado_urldash:create' %}" enctype="multipart/form-data" role="form"
+            method="POST">
             {% csrf_token %}
             <div class="modal-header border-bottom-success">
                 <h5 class="modal-title" id="exampleModalLabel">
@@ -24,16 +25,16 @@
                 <div class="row">
                     <div class="col-xl-8 col-md-8 col-8">
                         <div class="form-group ">
-                            <input type="text" class="form-control form-control-user" name="jornada" id="id_jornada"
-                                placeholder="Jornada" value="{% if form.jornada.value %}{{form.jornada.value}}{%endif%}"
-                                maxlength="80">
+                            <input type="text" class="form-control form-control-user"  name="jornada"
+                                id="id_jornada" placeholder="Jornada"
+                                value="{% if form.jornada.value %}{{form.jornada.value}}{%endif%}" maxlength="80">
                             <small class="text-danger"> {{ form.jornada.errors }}</small>
                         </div>
                     </div>
                     <div class="col-xl-4 col-md-4 col-4">
                         <div class="form-group">
-                            <input type="number" class="form-control form-control-user" required name="numeracion"
-                                id="id_nomeracion" placeholder="Numeracion"
+                            <input type="number" class="form-control form-control-user" required 
+                                name="numeracion" id="id_numeracion" placeholder="Numeracion"
                                 value="{% if form.numeracion.value %}{{form.numeracion.value}}{%endif%}">
                             <small class="text-danger"> {{ form.numeracion.errors }}</small>
                         </div>
@@ -42,7 +43,7 @@
                 <div class="row">
                     <div class="form-group col-xl-12 col-lg-12">
                         Seleccione una foto:
-                        <input type="file" name="imagen" class="form-control-file mt-3" id="id_imagen">
+                        <input type="file" name="imagen" required class="form-control-file mt-3" id="id_imagen">
                         <small class="text-danger"> {{ form.imagen.errors }}</small>
                     </div>
                 </div>
@@ -64,3 +65,49 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(function () {
+
+        var url = $('#formulario').attr("action");
+        var token = jQuery("[name=csrfmiddlewaretoken]").val();
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+
+            //toca hacerlo sin el serealizeArray porque no captura la imagen
+            var form = $('#formulario')[0];
+            var formData = new FormData(form);
+
+            $.ajax({
+                url: url,
+                method: "POST",
+                headers: { 'X-CSRFToken': token },
+                processData: false,
+                contentType: false,
+                data: formData,
+            })
+                .done(function (r, textStatus, xhr) {
+                    if (xhr.status = 200) {
+                        cerrar_modal()
+                        setTimeout('document.location.reload()', 1000);
+                        mensaje('Grado creado satisfactoriamente', 'success');
+                    }
+                    else {
+                        mensaje(textStatus, 'error');
+                    }
+                }).fail(function (error) {
+                    var r = error.responseJSON
+                    for (var clave in r) {
+                        // Controlando que json realmente tenga esa propiedad
+                        if (r.hasOwnProperty(clave)) {
+                            // Mostrando en pantalla la clave junto a su valor
+                            var input = 'id_' + String(clave);
+                            document.getElementById(input).style.borderColor = "red";
+                            mensaje(String(r[clave]), 'error')
+                        }
+                    }
+                })
+        })
+    });
+</script>

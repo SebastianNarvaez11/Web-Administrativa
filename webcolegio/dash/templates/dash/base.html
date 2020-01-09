@@ -470,6 +470,10 @@
     }
 
     function cerrar_modal() {
+
+      $('#popup').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+      })
       $('#popup').modal('hide');
       return false;
     }

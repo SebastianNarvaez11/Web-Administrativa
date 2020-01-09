@@ -1,24 +1,13 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
-        <form action="{% url 'user_urldash:update' %}" role="form" class="user" method="POST">
+        <form id="formulario" action="{% url 'user_urldash:update' %}" role="form" class="user" method="POST">
             {% csrf_token %}
             <div class="modal-header border-bottom-warning">
                 <h5 class="modal-title" id="exampleModalLabel">Actualizar Datos</h5>
                 <i class="fas fa-user-plus fa-2x text-gray-300"></i>
             </div>
             <div class="modal-body">
-                <div class="text-center">
-                    <small class="text-danger mb-3">
-                        {% if form.errors %}
-                        {% if form.non_field_errors %}
-                        {% for error in form.non_field_errors %}
-                        {{error|escape }}
-                        {% endfor %}
-                        {% endif %}
-                        {% endif %}
-                    </small>
-                </div>
                 <div class="form-group">
                     <input type="text" class="form-control form-control-user" name="username" maxlength="150" autofocus
                         required id="id_username" placeholder="Nombre de Usuario"
@@ -33,8 +22,8 @@
                         <small class="text-danger"> {{ form.first_name.errors }}</small>
                     </div>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" name="last_name"
-                            id="id_last_name" placeholder="Apellidos"
+                        <input type="text" class="form-control form-control-user" name="last_name" id="id_last_name"
+                            placeholder="Apellidos"
                             value="{% if form.last_name.value %}{{form.last_name.value}}{%endif%}">
                     </div>
                     <small class="text-danger"> {{ form.last_name.errors }}</small>
@@ -59,3 +48,47 @@
         </form>
     </div>
 </div>
+
+
+<script>
+    $(function () {
+
+        var url = $('#formulario').attr("action");
+        var token = jQuery("[name=csrfmiddlewaretoken]").val();
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+            //alert(token);
+            var formData = $("form").serializeArray();
+            //console.log(formData);
+            $.ajax({
+                url: url,
+                method: "POST",
+                headers: { 'X-CSRFToken': token },
+                data: formData,
+            })
+                .done(function (r, textStatus, xhr) {
+                    if (xhr.status = 200) {
+                        cerrar_modal()
+                        setTimeout('document.location.reload()', 1000);
+                        mensaje('Datos actualizados satisfactoriamente', 'success');
+                    }
+                    else {
+                        mensaje(textStatus, 'error');
+                    }
+                }).fail(function (error) {
+                    var r = error.responseJSON
+                    console.log(r)
+                    for (var clave in r) {
+                        // Controlando que json realmente tenga esa propiedad
+                        if (r.hasOwnProperty(clave)) {
+                            // Mostrando en pantalla la clave junto a su valor
+                            var input = 'id_' + String(clave);
+                            document.getElementById(input).style.borderColor = "red";
+                            mensaje(String(r[clave]), 'error')
+                        }
+                    }
+                })
+        })
+    });
+</script>
