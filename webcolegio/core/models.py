@@ -1,20 +1,21 @@
 from django.db import models
 from docentes.models import Materia
+from .validators import *
 # Create your models here.
 
 
 class Colegio(models.Model):
-    nombre = models.CharField('Nombre', max_length=100, blank=True, null=True,)
-    lema = models.CharField('Lema', max_length=300, blank=True, null=True, )
+    nombre = models.CharField('Nombre', max_length=30, blank=False, null=False, validators=[validate_only_letters])
+    lema = models.CharField('Lema', max_length=300, blank=False, null=False, validators=[validate_only_letters])
     logo = models.ImageField(
         'Logo', upload_to='colegio', blank=True, null=True)
-    email = models.EmailField('Email', max_length=200, blank=True, null=True)
+    email = models.EmailField('Email', max_length=200, blank=False, null=False)
     direccion = models.CharField(
-        'Dirección', max_length=300, blank=True, null=True)
+        'Dirección', max_length=300, blank=False, null=False)
     telefono = models.CharField(
-        'Telefono', max_length=100, blank=True, null=True)
+        'Telefono', max_length=100, blank=False, null=False)
     horarios = models.CharField(
-        'Horarios', max_length=500, blank=True, null=True)
+        'Horarios', max_length=500, blank=False, null=False)
     mision = models.TextField('Misión')
     vision = models.TextField('Vision')
     historia = models.TextField('Historia')

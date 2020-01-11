@@ -13,7 +13,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, verbose_name='Usuario', on_delete=models.CASCADE)
     imagen = models.ImageField('Foto de perfil', upload_to=custom_upload_to ,blank=True, null=True)
     link = models.URLField('Link', blank= True, null = True)
-    info = models.CharField('Informacion', blank=True, null=True, max_length=300)
+    info = models.CharField('Informacion', blank=True, null=True, max_length=150)
     edicion = models.DateTimeField('Edicion', auto_now=True)
 
     class Meta:

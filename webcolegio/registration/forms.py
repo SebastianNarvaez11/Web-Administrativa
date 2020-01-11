@@ -60,6 +60,7 @@ class UserPermisionForm(UserChangeForm):
 
 
 class ProfileForm(ModelForm):
+    
     class Meta:
         model = Profile
         fields = ['imagen', 'info', 'link']

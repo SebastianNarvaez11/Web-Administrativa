@@ -15,9 +15,9 @@ from django.contrib import messages
 
 def index(request):
     if not Colegio.objects.all():
-        Colegio.objects.create(nombre='', lema='', logo='null',
-                               email='', direccion='', telefono='',
-                               horarios='', mision='', vision='',
+        Colegio.objects.create(nombre='nombrecolegio', lema='lemacolegio', logo='null',
+                               email='email@gmail.com', direccion='direccioncolegio', telefono='123456',
+                               horarios='horarioscolegio', mision='', vision='',
                                historia='', creacion='', edicion='')
         return redirect('colegio_urldash:create', pk=1)
 
