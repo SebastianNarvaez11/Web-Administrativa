@@ -1,10 +1,16 @@
-from django.forms import forms, ModelForm
+from django.forms import ModelForm
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Profile
+from core.validators import *
 
 
 class UserForm(UserCreationForm):
+    username = forms.CharField(max_length=15)
+    first_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
+    last_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
+    email = forms.EmailField(max_length=254, required=True)
 
     class Meta:
         model = User
@@ -24,6 +30,11 @@ class UserForm(UserCreationForm):
 
 
 class UserUpdateForm(UserChangeForm):
+    username = forms.CharField(max_length=15, min_length=5)
+    first_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
+    last_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
+    email = forms.EmailField(max_length=254, required=True)
+
 
     class Meta:
         model = User
