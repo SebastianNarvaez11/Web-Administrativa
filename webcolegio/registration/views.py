@@ -83,7 +83,7 @@ class UserDeleteView(SinPermisos, DeleteView):
     success_url = reverse_lazy('user_urldash:list')
     success_message = 'Usuario eliminado satisfactoriamente'
 
-    # Toca meterle esto devido a un error en django
+    # Toca meterle esto devido a un error en django para que envie el mensaje
     def delete(self, request, *args, **kwargs):
         usuario = self.get_object()
         #crea o llama un perfil para que no de error al elimanarle la foto 

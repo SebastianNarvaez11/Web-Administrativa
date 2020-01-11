@@ -3,20 +3,20 @@
 
         <form action="{% url 'user_urldash:delete' user.id%}" role="form" method="POST">
             {% csrf_token %}
-            <div class="modal-header border-bottom-success">
+            <div class="modal-header border-bottom-danger">
                 <h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
-                <i class="fas fa-book fa-2x text-gray-300 "></i>
+                <i class="fas fa-exclamation-triangle fa-2x text-gray-300 "></i>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <p>Esa seguro de eliminar al usuario"{{user.username}}" de forma permanente?</p>
+                            <p>Esta seguro de eliminar al usuario <b>"{{user.username}}"</b> de forma permanente?</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer border-bottom-success">
+            <div class="modal-footer border-bottom-danger">
                 <div class="dropdown-divider"></div>
                 <div class="row">
                     <div class="col text-center">

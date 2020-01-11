@@ -1,6 +1,6 @@
 from django.urls import path
 from .import views
-from .views import ServiceListView, ServiceCreateView, ServiceUpdateView
+from .views import *
 
 urlpatterns = [
     path('', views.services, name='services'),
@@ -10,5 +10,6 @@ urlpatterns = [
 services_urldash = ([
     path('list/', ServiceListView.as_view(), name='list'),
     path('create/', ServiceCreateView.as_view(), name='create'),
-    path('update/<int:pk>/', ServiceUpdateView.as_view(), name='update')
+    path('update/<int:pk>/', ServiceUpdateView.as_view(), name='update'),
+    path('delete/<int:pk>/', ServiceDeleteView.as_view(), name='delete')
 ], 'services_dash')

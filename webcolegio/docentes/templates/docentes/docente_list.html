@@ -58,7 +58,9 @@
                                     class="btn btn-warning btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-circle">
+                                <a href="#"
+                                    onclick=" return abrir_modal('{% url 'docente_urldash:delete' docente.id %}')"
+                                    class="btn btn-danger btn-circle">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>

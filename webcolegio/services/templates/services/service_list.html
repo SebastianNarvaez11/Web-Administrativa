@@ -56,10 +56,12 @@
                             <td>{{service.estado|yesno:"Publico,Oculto"}}</td>
                             <td>{{service.creacion|date:"d/m/y"}}</td>
                             <td>{{service.edicion|date:"d/m/y"}}</td>
-                            <td><a href="{% url 'services_dash:update' service.id %}" class="btn btn-warning btn-circle">
+                            <td><a href="{% url 'services_dash:update' service.id %}"
+                                    class="btn btn-warning btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-circle">
+                                <a href="#" onclick=" return abrir_modal('{% url 'services_dash:delete' service.id %}')"
+                                    class="btn btn-danger btn-circle">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>

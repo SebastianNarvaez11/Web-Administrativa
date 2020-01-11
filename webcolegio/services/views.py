@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Service
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import ServiceForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from dash.views import SinPermisos
 from django.utils.decorators import method_decorator
+from django.contrib import messages
 # Create your views here.
 
 
@@ -44,3 +45,18 @@ class ServiceUpdateView(SinPermisos, UpdateView):
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('services_dash:list')
     success_message = 'Servicio actualizado satisfactoriamente'
+
+
+@method_decorator(login_required, name='dispatch')
+class ServiceDeleteView(SinPermisos, DeleteView):
+    permission_required = 'services.delete_service'
+    model = Service
+    success_url = reverse_lazy('services_dash:list')
+    success_message = 'Servicio eliminado satisfactoriamente'
+
+    # Toca meterle esto devido a un error en django para que envie el mensaje
+    def delete(self, request, *args, **kwargs):
+        service = self.get_object()
+        service.imagen.delete()
+        messages.success(self.request, self.success_message)
+        return super(ServiceDeleteView, self).delete(request, *args, **kwargs)

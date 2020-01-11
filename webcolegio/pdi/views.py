@@ -83,6 +83,19 @@ class CategoryUpdateView(SinPermisos, UpdateView):
     success_url = reverse_lazy('category_dash:list')
 
 
+@method_decorator(login_required, name='dispatch')
+class CategoryDeleteView(SinPermisos, DeleteView):
+    permission_required = 'pdi.delete_category'
+    model = Category
+    success_url = reverse_lazy('category_dash:list')
+    success_message = "Categoria eliminada satisfactoriamente"
+
+    # Toca meterle esto devido a un error en django, para que mande el mensaje
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(CategoryDeleteView, self).delete(request, *args, **kwargs)
+
+
 ######## Vistas Del Dashboard Post #########################
 @method_decorator(login_required, name='dispatch')
 class PostListView(ListView):
@@ -131,7 +144,7 @@ class PostDeleteView(SinPermisos, DeleteView):
     success_url = reverse_lazy('post_dash:list')
     success_message = "Post eliminado satisfactoriamente"
 
-    #Toca meterle esto devido a un error en django
+    # Toca meterle esto devido a un error en django, para que mande el mensaje
     def delete(self, request, *args, **kwargs):
         post = self.get_object()
         post.imagen.delete()
