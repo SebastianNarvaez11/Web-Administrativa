@@ -14,9 +14,9 @@ def custom_upload_to(instance, filename):
     
 
 class Service(models.Model):
-    titulo = models.CharField('Titulo', max_length=20, blank=False, null=False, unique=True)
+    titulo = models.CharField('Titulo', max_length=20, unique=True)
     slug = models.SlugField('Slug/Url')
-    descripcion = models.CharField('Descripción', max_length=50, blank=False, null=False  )
+    descripcion = models.CharField('Descripción', max_length=50)
     contenido = RichTextField('Contenido')
     mensualidad = models.IntegerField('Mensualidad')
     matricula = models.IntegerField('Matricula')

@@ -16,8 +16,8 @@
                 <div class="row mt-3">
                     <div class="col-xl-12 col-md-12 col-12">
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" required name="nombre"
-                                id="id_nombre" placeholder="Nombre"
+                            <input type="text" class="form-control form-control-user"  name="nombre"
+                                id="id_nombre" placeholder="Nombre" maxlength="15" minlength="4"
                                 value="{% if form.nombre.value %}{{grado.nombre}}{%endif%}">
                             <small class="text-danger"> {{ form.nombre.errors }}</small>
                         </div>
@@ -28,14 +28,14 @@
                         <div class="form-group ">
                             <input type="text" class="form-control form-control-user" name="jornada" id="id_jornada"
                                 placeholder="Jornada" value="{% if form.jornada.value %}{{grado.jornada}}{%endif%}"
-                                maxlength="80">
+                                maxlength="20" minlength="2" required> 
                             <small class="text-danger"> {{ form.jornada.errors }}</small>
                         </div>
                     </div>
                     <div class="col-xl-4 col-md-4 col-4">
                         <div class="form-group">
                             <input type="number" class="form-control form-control-user" required name="numeracion"
-                                id="id_nomeracion" placeholder="Numeracion"
+                                id="id_numeracion" placeholder="Numeracion" max="11" min="0"
                                 value="{% if form.numeracion.value %}{{grado.numeracion}}{%endif%}">
                             <small class="text-danger"> {{ form.numeracion.errors }}</small>
                         </div>

@@ -4,7 +4,7 @@ from core.validators import *
 
 
 class Materia(models.Model):
-    nombre = models.CharField('Nombre', max_length=20,validators=[validate_only_letters])
+    nombre = models.CharField('Nombre', max_length=20, unique=True, validators=[validate_only_letters, MinLengthValidator(4)])
     creacion = models.DateField('Fecha de creacion', auto_now_add=True)
     edicion = models.DateField('Fecha de edicion', auto_now=True)
 

@@ -6,16 +6,13 @@ from .validators import *
 
 class Colegio(models.Model):
     nombre = models.CharField('Nombre', max_length=30, blank=False, null=False, validators=[validate_only_letters])
-    lema = models.CharField('Lema', max_length=300, blank=False, null=False, validators=[validate_only_letters])
+    lema = models.CharField('Lema', max_length=50, blank=False, null=False, validators=[validate_only_letters])
     logo = models.ImageField(
         'Logo', upload_to='colegio', blank=True, null=True)
-    email = models.EmailField('Email', max_length=200, blank=False, null=False)
-    direccion = models.CharField(
-        'Dirección', max_length=300, blank=False, null=False)
-    telefono = models.CharField(
-        'Telefono', max_length=100, blank=False, null=False)
-    horarios = models.CharField(
-        'Horarios', max_length=500, blank=False, null=False)
+    email = models.EmailField('Email', max_length=254, blank=False, null=False)
+    direccion = models.CharField('Dirección', max_length=30, blank=False, null=False)
+    telefono = models.CharField('Telefono', max_length=12, blank=False, null=False, validators=[validate_only_numbers])
+    horarios = models.CharField('Horarios', max_length=100, blank=False, null=False)
     mision = models.TextField('Misión')
     vision = models.TextField('Vision')
     historia = models.TextField('Historia')
@@ -41,10 +38,10 @@ def custom_upload_to_grado(instance, filename):
 
 
 class Grado(models.Model):
-    nombre = models.CharField('Nombre', max_length=15)
+    nombre = models.CharField('Nombre', max_length=15, unique=True, validators=[validate_only_letters, MinLengthValidator(4)])
     jornada = models.CharField('Jornadas', max_length=20)
-    numeracion = models.IntegerField('Numeracion')
-    materias = models.ManyToManyField(Materia, verbose_name='Asignaturas que ve', related_name='get_materias')
+    numeracion = models.IntegerField('Numeracion', unique=True, error_messages={"unique":"Ya existe un grado con esta numeracion"})
+    materias = models.ManyToManyField(Materia, verbose_name='Asignaturas que ve', related_name='get_materias', blank=True)
     imagen = models.ImageField('Imagen', upload_to=custom_upload_to_grado)
     creacion = models.DateTimeField('Fecha de Creacion', auto_now_add=True)
     edicion = models.DateField('Fecha de edicion', auto_now=True)

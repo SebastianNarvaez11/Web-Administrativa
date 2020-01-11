@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                    <div class="font-weight-bold text-uppercase mb-1">
                         Ingrese los datos de la institucion
                     </div>
                     <div class="dropdown-divider"></div>
@@ -22,30 +22,30 @@
                             </div>
                             <div class="form-group col-xl-6 col-lg-6">
                                 <input type="text" class="form-control form-control-user" required name="lema"
-                                    id="id_lema" placeholder="Lema" value="{{colegio.lema}}" maxlength="50">
+                                    id="id_lema" placeholder="Lema" value="{{colegio.lema}}" maxlength="50" minlength="7">  
                                 <small class="text-danger"> {{ form.lema.errors }}</small>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="text" class="form-control form-control-user" required name="email"
-                                    id="id_email" placeholder="Email" value="{{colegio.email}}" maxlength="40">
+                                    id="id_email" placeholder="Email" value="{{colegio.email}}" maxlength="254">
                                 <small class="text-danger"> {{ form.email.errors }}</small>
                             </div>
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="text" class="form-control form-control-user" required name="direccion"
                                     id="id_direccion" placeholder="Direccion" value="{{colegio.direccion}}"
-                                    maxlength="20">
+                                    maxlength="30" minlength="7"> 
                                 <small class="text-danger">{{ form.direccion.errors }}</small>
                             </div>
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="text" class="form-control form-control-user" required name="telefono"
-                                    id="id_telefono" placeholder="Telefono" value="{{colegio.telefono}}" maxlength="10">
+                                    id="id_telefono" placeholder="Telefono" value="{{colegio.telefono}}" maxlength="12" minlength="7"> 
                                 <small class="text-danger">{{ form.telefono.errors }}</small>
                             </div>
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="text" class="form-control form-control-user" required name="horarios"
-                                    id="id_horarios" placeholder="Horarios" value="{{colegio.horarios}}" maxlength="20">
+                                    id="id_horarios" placeholder="Horarios" value="{{colegio.horarios}}" maxlength="100">
                                 <small class="text-danger"> {{ form.horarios.errors }}</small>
                             </div>
                         </div>

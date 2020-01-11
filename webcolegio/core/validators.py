@@ -1,5 +1,7 @@
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, ngettext_lazy
+from django.core.validators import *
+from django.utils.deconstruct import deconstructible
 
 
 def validate_only_letters(value):
@@ -9,3 +11,27 @@ def validate_only_letters(value):
             _('Este campo solo admite letras'),
             params={'value': value},
         )
+
+
+def validate_only_numbers(value):
+    valor = value.replace(" ", "")
+    if not valor.isdigit():
+        raise ValidationError(
+            _('Este campo solo admite valores numericos'),
+            params={'value': value},
+        )
+
+
+@deconstructible
+class MinLengthValidator(BaseValidator):
+    message = ngettext_lazy(
+        'Ensure this value has at least %(limit_value)d character (it has %(show_value)d).',
+        'Ensure this value has at least %(limit_value)d characters (it has %(show_value)d).',
+        'limit_value')
+    code = 'min_length'
+
+    def compare(self, a, b):
+        return a < b
+
+    def clean(self, x):
+        return len(x)
