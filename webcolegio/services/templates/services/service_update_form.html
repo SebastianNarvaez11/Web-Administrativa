@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                    <div class="font-weight-bold text-uppercase mb-1">
                         Actualizar Servicio
                     </div>
                     <div class="dropdown-divider"></div>
@@ -17,7 +17,7 @@
                         <div class="row ">
                             <div class="form-group col-xl-6 col-lg-6">
                                 <input type="text" class="form-control form-control-user" required name="titulo"
-                                    id="id_titulo" placeholder="Titulo" value="{{service.titulo}}" maxlength="20">
+                                    id="id_titulo" placeholder="Titulo" value="{{service.titulo}}" maxlength="20" minlength="4">
                                 <small class="text-danger"> {{ form.titulo.errors }}</small>
                             </div>
                             <div class="form-group col-xl-6 col-lg-6">
@@ -30,7 +30,7 @@
                             <div class="form-group col-xl-12 col-lg-12">
                                 <div class="django-ckeditor-widget" data-field-id="id_contenido"
                                     style="display: inline-block;">
-                                    <textarea class="form-control" cols="40" id="id_contenido" name="contenido"
+                                    <textarea class="form-control" required cols="40" id="id_contenido" name="contenido"
                                         rows="10" required data-processed="0"
                                         data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;Full&quot;, &quot;height&quot;: 291, &quot;width&quot;: 835, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;language&quot;: &quot;es-co&quot;}"
                                         data-external-plugin-resources="[]" data-id="id_contenido"
@@ -42,12 +42,12 @@
                         <div class="row ">
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="number" class="form-control form-control-user" required name="mensualidad"
-                                    id="id_mensualidad" placeholder="Mensualidad" value="{{service.mensualidad}}">
+                                    id="id_mensualidad" placeholder="Mensualidad" value="{{service.mensualidad}}" min="0">
                                 <small class="text-danger"> {{ form.mensualidad.errors }}</small>
                             </div>
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="number" class="form-control form-control-user" required name="matricula"
-                                    id="id_matricula" placeholder="Matricula" value="{{service.matricula}}">
+                                    id="id_matricula" placeholder="Matricula" value="{{service.matricula}}" min="0">
                                 <small class="text-danger"> {{ form.matricula.errors }}</small>
                             </div>
                             <div class="form-group col-xl-6 col-lg-6">
@@ -96,11 +96,6 @@
                             </div>
                         </div>
                     </form>
-
-
-
-
-
                 </div>
             </div>
         </div>

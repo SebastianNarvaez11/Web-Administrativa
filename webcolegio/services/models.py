@@ -1,6 +1,7 @@
 from django.db import models
 import re
 from ckeditor.fields import RichTextField
+from core.validators import *
 # Create your models here.
 
 def custom_upload_to(instance, filename):
@@ -14,12 +15,12 @@ def custom_upload_to(instance, filename):
     
 
 class Service(models.Model):
-    titulo = models.CharField('Titulo', max_length=20, unique=True)
+    titulo = models.CharField('Titulo', max_length=20, unique=True, validators=[MinLengthValidator(4)])
     slug = models.SlugField('Slug/Url')
     descripcion = models.CharField('Descripción', max_length=50)
     contenido = RichTextField('Contenido')
-    mensualidad = models.IntegerField('Mensualidad')
-    matricula = models.IntegerField('Matricula')
+    mensualidad = models.IntegerField('Mensualidad', validators=[MinValueValidator(0)])
+    matricula = models.IntegerField('Matricula', validators=[MinValueValidator(0)])
     imagen = models.ImageField('Imagen', upload_to=custom_upload_to)
     jornada = models.CharField('Jornada(s)', max_length=80, blank=True, null=True)
     index = models.BooleanField('Mostrar en el inicio', default=True)

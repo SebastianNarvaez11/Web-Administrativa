@@ -21,17 +21,3 @@ def validate_only_numbers(value):
             params={'value': value},
         )
 
-
-@deconstructible
-class MinLengthValidator(BaseValidator):
-    message = ngettext_lazy(
-        'Ensure this value has at least %(limit_value)d character (it has %(show_value)d).',
-        'Ensure this value has at least %(limit_value)d characters (it has %(show_value)d).',
-        'limit_value')
-    code = 'min_length'
-
-    def compare(self, a, b):
-        return a < b
-
-    def clean(self, x):
-        return len(x)

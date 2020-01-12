@@ -27,8 +27,8 @@ def custom_upload_to(instance, filename):
         return 'docentes/' + filename
 
 class Docente(models.Model):
-    nombre = models.CharField('Nombre', max_length=15)
-    apellido = models.CharField('Apellido', max_length=15)
+    nombre = models.CharField('Nombre', max_length=20, validators=[validate_only_letters, MinLengthValidator(2)])
+    apellido = models.CharField('Apellido', max_length=20, validators=[validate_only_letters, MinLengthValidator(2)])
     imagen = models.ImageField('Foto', upload_to=custom_upload_to)
     informacion = models.TextField('Información', blank=True, null=True, max_length=100)
     materias = models.ManyToManyField(Materia, verbose_name='Materias que enseña', related_name='obtener_docentes')

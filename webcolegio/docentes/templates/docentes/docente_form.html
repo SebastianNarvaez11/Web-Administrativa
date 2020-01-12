@@ -7,11 +7,10 @@
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                        Nuevo Docente
+                    <div class="font-weight-bold text-uppercase mb-1">
+                        Crear Docente
                     </div>
                     <div class="dropdown-divider"></div>
-
                     <form method="POST" class="user" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row ">
@@ -23,14 +22,14 @@
                             </div>
                             <div class="form-group col-xl-6 col-lg-6">
                                 <input type="text" class="form-control form-control-user" required name="nombre"
-                                    id="id_nombre" placeholder="Nombre"
-                                    value="{% if form.nombre.value %}{{form.nombre.value}}{%endif%}" maxlength="20">
+                                    id="id_nombre" placeholder="Nombre" maxlength="20" minlength="2"
+                                    value="{% if form.nombre.value %}{{form.nombre.value}}{%endif%}">
                                 <small class="text-danger"> {{ form.nombre.errors }}</small>
                             </div>
                             <div class="form-group col-xl-6 col-lg-6">
                                 <input type="text" class="form-control form-control-user" required name="apellido"
-                                    id="id_apellido" placeholder="Apellido"
-                                    value="{% if form.apellido.value %}{{form.apellido.value}}{%endif%}" maxlength="50">
+                                    id="id_apellido" placeholder="Apellido" maxlength="20" minlength="2"
+                                    value="{% if form.apellido.value %}{{form.apellido.value}}{%endif%}">
                                 <small class="text-danger"> {{ form.apellido.errors }}</small>
                             </div>
                         </div>

@@ -7,9 +7,9 @@ from core.validators import *
 
 
 class UserForm(UserCreationForm):
-    username = forms.CharField(max_length=15)
-    first_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
-    last_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
+    username = forms.CharField(max_length=15, validators=[MinLengthValidator(5)])
+    first_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters, MinLengthValidator(2)])
+    last_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters, MinLengthValidator(2)])
     email = forms.EmailField(max_length=254, required=True)
 
     class Meta:
@@ -30,9 +30,9 @@ class UserForm(UserCreationForm):
 
 
 class UserUpdateForm(UserChangeForm):
-    username = forms.CharField(max_length=15, min_length=5)
-    first_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
-    last_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters])
+    username = forms.CharField(max_length=15, validators=[MinLengthValidator(5)])
+    first_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters, MinLengthValidator(2)])
+    last_name = forms.CharField(max_length=20, required=True, validators=[validate_only_letters, MinLengthValidator(2)])
     email = forms.EmailField(max_length=254, required=True)
 
 

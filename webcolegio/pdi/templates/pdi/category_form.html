@@ -15,7 +15,7 @@
                     <div class="col-xl-12 col-md-12 col-12">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user" required name="nombre"
-                                id="id_nombre" placeholder="Nombre"
+                                id="id_nombre" placeholder="Nombre" maxlength="15" minlength="4"
                                 value="{% if form.nombre.value %}{{form.nombre.value}}{%endif%}">
                             <small class="text-danger"> {{ form.nombre.errors }}</small>
                         </div>

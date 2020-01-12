@@ -37,7 +37,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Materias</th>
-                            <th scope="col">Grados</th>
                             <th scope="col">Creacion</th>
                             <th scope="col">Edicion</th>
                             <th scope="col">Acciones</th>
@@ -49,8 +48,6 @@
                             <th scope="row">{{docente.id}}</th>
                             <td>{{docente.nombre}} {{docente.apellido}}</td>
                             <th>{% for materia in docente.materias.all %}{{materia.nombre}}{% if not forloop.last %},
-                                {%endif%}{% endfor %}</th>
-                            <th>{% for grado in docente.grados.all %}{{grado.numeracion}}°{% if not forloop.last %},
                                 {%endif%}{% endfor %}</th>
                             <td>{{docente.creacion|date:"d/m/y"}}</td>
                             <td>{{docente.edicion|date:"d/m/y"}}</td>
