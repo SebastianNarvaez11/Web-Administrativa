@@ -25,7 +25,7 @@ SECRET_KEY = '$wtg_35jys5yy&qk&8k$xoy^5i=#^$^3y47f9^#un*c^p%i&2j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','[::1]']
 
 
 # Application definition
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'webcolegio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,7 +128,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+#Si se trabaja con el directorio static en la raiz del proyecto
+#nos ahorraremos espacio en el servidor, ya que collectstatic duplica los archivos estaticos
+
+STATIC_URL = '/static/' 
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)#para cuando Debug=True y la carpeta static este en la raiz del proyecto porque django se encarga de servir los archivos estaticos
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')#para cuando este en produccion, y se haga el  collectstatic
 
 # media config
 MEDIA_URL = '/media/'
