@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$wtg_35jys5yy&qk&8k$xoy^5i=#^$^3y47f9^#un*c^p%i&2j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','[::1]']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'webcolegio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'webcolegio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -128,16 +128,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-#Si se trabaja con el directorio static en la raiz del proyecto
-#nos ahorraremos espacio en el servidor, ya que collectstatic duplica los archivos estaticos
+# Si se trabaja con el directorio static en la raiz del proyecto
+# nos ahorraremos espacio en el servidor, ya que collectstatic duplica los archivos estaticos
+STATIC_URL = '/static/'
+# para cuando Debug=True y la carpeta static este en la raiz del proyecto porque django se encarga de servir los archivos estaticos
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')#para cuando este en produccion, y se haga el  collectstatic
 
-STATIC_URL = '/static/' 
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)#para cuando Debug=True y la carpeta static este en la raiz del proyecto porque django se encarga de servir los archivos estaticos
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')#para cuando este en produccion, y se haga el  collectstatic
 
 # media config
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
 
 # CONFIGURACION DEL CORREO
 # Configuracion SMTP
@@ -145,9 +150,25 @@ if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 else:
-    pass
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_HOST_USER = "testing.developer.404@gmail.com"
+    EMAIL_HOST_PASSWORD = 'tatannvrz'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
 
-#Redireccion de autenticacion
+
+
+
+# Redireccion de autenticacion
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
+
+
+
+# ckeditor
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    }
+}

@@ -1,10 +1,12 @@
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 import re
 from core.models import Grado
 from docentes.models import Materia
 from core.validators import *
+
 
 # Create your models here.
 
@@ -36,7 +38,7 @@ def custom_upload_to(instance, filename):
 class Post(models.Model):
     titulo = models.CharField('Titulo', max_length=20, unique=True, validators=[validate_only_letters, MinLengthValidator(3)])
     descripcion = models.TextField('Descripcion', max_length=30, blank=True, null=True)
-    contenido = models.TextField('Contenido')
+    contenido = RichTextField('Contenido')
     imagen = models.ImageField('Imagen', upload_to=custom_upload_to) 
     # autor enlazado con los usuarios de django
     autor = models.ForeignKey(User, verbose_name='Autor', on_delete=models.CASCADE)
