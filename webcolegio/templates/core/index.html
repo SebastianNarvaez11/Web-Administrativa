@@ -27,7 +27,8 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 
-    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lilita+One&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lilita+One&display=swap" rel="stylesheet">
+    {% block style %}{% endblock style %}
 </head>
 
 <body>
@@ -99,8 +100,8 @@
                                 his void unto last session for bite. Set have great you'll male grass yielding yielding
                                 man
                             </p>
-                            <a href="#" class="btn_1">Nuestros Servicios</a>
-                            <a href="#" class="btn_2">Contactenos</a>
+                            <a href="{% url 'services' %}" class="btn_1">Nuestros Servicios</a>
+                            <a href="{% url 'contact' %}" class="btn_2">Contactenos</a>
                         </div>
                     </div>
                 </div>
@@ -119,44 +120,38 @@
                         <h2>{{COLEGIO.lema}}</h2>
                         <p>Set have great you male grass yielding an yielding first their you're have called the
                             abundantly fruit were man </p>
-                        <a href="#" class="btn_1">Leer más</a>
+                        <a href="{% url 'about' %}" class="btn_1">Leer más</a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-3">
-                    <a href="#">
-                        <div class="single_feature" href="#">
-                            <div class="single_feature_part">
-                                <span class="single_feature_icon"><i class="ti-ruler-pencil"></i></span>
-                                <h4>Exelencia Academica</h4>
-                                <p>Set have great you male grasses yielding yielding first their to called deep
-                                    abundantly Set have great you male</p>
-                            </div>
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <span class="single_feature_icon"><i class="ti-ruler-pencil"></i></span>
+                            <h4>Exelencia Academica</h4>
+                            <p>Set have great you male grasses yielding yielding first their to called deep
+                                abundantly Set have great you male</p>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="col-sm-6 col-xl-3">
-                    <a href="#">
-                        <div class="single_feature">
-                            <div class="single_feature_part">
-                                <span class="single_feature_icon"><i class="ti-medall"></i></span>
-                                <h4>Docentes Calificados</h4>
-                                <p>Set have great you male grasses yielding yielding first their to called deep
-                                    abundantly Set have great you male</p>
-                            </div>
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <span class="single_feature_icon"><i class="ti-medall"></i></span>
+                            <h4>Docentes Calificados</h4>
+                            <p>Set have great you male grasses yielding yielding first their to called deep
+                                abundantly Set have great you male</p>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="col-sm-6 col-xl-3">
-                    <a href="#">
-                        <div class="single_feature">
-                            <div class="single_feature_part single_feature_part_2">
-                                <span class="single_service_icon style_icon"><i class="ti-rocket"></i></span>
-                                <h4>Colegio Cohete</h4>
-                                <p>Set have great you male grasses yielding yielding first their to called deep
-                                    abundantly Set have great you male</p>
-                            </div>
+                    <div class="single_feature">
+                        <div class="single_feature_part single_feature_part_2">
+                            <span class="single_service_icon style_icon"><i class="ti-rocket"></i></span>
+                            <h4>Colegio Cohete</h4>
+                            <p>Set have great you male grasses yielding yielding first their to called deep
+                                abundantly Set have great you male</p>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -449,6 +444,7 @@
     <script src="{% static 'core/js/waypoints.min.js' %}"></script>
     <!-- custom js -->
     <script src="{% static 'core/js/custom.js' %}"></script>
+    <script src="{% static 'core/js/docente.js' %}"></script>
 </body>
 
 </html>

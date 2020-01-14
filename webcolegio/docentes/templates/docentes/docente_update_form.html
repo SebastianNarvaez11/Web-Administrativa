@@ -35,13 +35,13 @@
                                     <div class="form-group col-xl-6 col-lg-6">
                                         <input type="text" class="form-control form-control-user" required name="nombre"
                                             id="id_nombre" placeholder="Nombre" value="{{docente.nombre}}"
-                                            maxlength="20" minlength="2">
+                                            maxlength="12" minlength="2">
                                         <small class="text-danger"> {{ form.nombre.errors }}</small>
                                     </div>
                                     <div class="form-group col-xl-6 col-lg-6">
                                         <input type="text" class="form-control form-control-user" required
                                             name="apellido" id="id_apellido" placeholder="Apellido"
-                                            value="{{docente.apellido}}" maxlength="20" minlength="2">
+                                            value="{{docente.apellido}}" maxlength="12" minlength="2">
                                         <small class="text-danger"> {{ form.apellido.errors }}</small>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                     <div class="form-group col-xl-12 col-lg-12">
                                         <input type="text" class="form-control form-control-user" required
                                             name="informacion" id="id_informacion" placeholder="Informacion del docente"
-                                            value="{{docente.informacion}}" maxlength="50">
+                                            value="{{docente.informacion}}" maxlength="150">
                                         <small class="text-danger"> {{ form.informacion.errors }}</small>
                                     </div>
                                 </div>

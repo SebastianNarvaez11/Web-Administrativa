@@ -5,6 +5,11 @@
 Academico | Docentes
 {% endblock titulo %}
 
+{% block style %}
+<link rel="stylesheet" href="{% static 'core/css/docente.css' %}">
+{% endblock style %}
+
+
 {% block titulobaner %}
 Docentes
 {% endblock titulobaner %}
@@ -12,8 +17,6 @@ Docentes
 
 {% block body %}
 
-
-<!--::servicios::-->
 <section class="blog_part section_padding">
     <div class="container">
         <div class="row justify-content-center">
@@ -25,41 +28,37 @@ Docentes
             </div>
         </div>
         <div class="container">
-            <div class="row d-flex justify-content-center">
+            <div class="row active-with-click mb-5">
                 {% for docente in docentes %}
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 d-flex pt-4">
-                    <div class="card flex-fill border contcard" style="width: 18rem;">
-                        <div class="contenedor">
-                            <img src="{{ docente.imagen.url }}" class="card-img-top imagen" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title titulo">{{docente.nombre}} {{docente.apellido}}</h3>
-                            <p class="card-text mt-3">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <article class="material-card Red">
+                        <h2>
+                            <span>{{docente.nombre}} {{docente.apellido}}</span>
+                            <strong>
+                                <i class="fa fa-fw fa-magic"></i>
+                                Docente
+                            </strong>
+                        </h2>
+                        <div class="mc-content">
+                            <div class="img-container">
+                                <img class="imagen_docente" src="{{docente.imagen.url}}">
+                            </div>
+                            <div class="mc-description">
                                 {{docente.informacion}}
-                            </p>
-
-                        </div>
-                        <div class="dropdown dropup">
-                            <button class="btn btn-outline-primary dropdown-toggle menu" type="button"
-                                id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </button>
-                            <div class="dropdown-menu menu bg-white" aria-labelledby="dropdownMenu2">
-                                <h6 class="dropdown-header text-center">informacion adicional.</h6>
-                                <div class="container">
-                                    <p>
-                                        <p class="text-primary"> Grados:</p>
-                                    </p>
-                                    {% for grado in docente.grados.all %}{{grado.numeracion}}°{% if not forloop.last %},
-                                    {% endif %}{% endfor%}</p>
-                                    <p>
-                                        <p class="text-primary"> Asignaturas:</p>
-                                        {% for materia in docente.materias.all %}{{materia.nombre}}{% if not forloop.last %},
-                                        {% endif %}{% endfor%}
-                                    </p><br>
-                                </div>
                             </div>
                         </div>
-                    </div>
+                        <a class="mc-btn-action">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="mc-footer">
+                            <h4>
+                                Enseña:
+                            </h4>
+                            <h5 class="container-fluid"> {% for materia in docente.materias.all %}{{materia.nombre}}{% if not forloop.last %},
+                                {% endif %}{% endfor%}
+                            </h5>
+                        </div>
+                    </article>
                 </div>
                 {% endfor %}
             </div>
