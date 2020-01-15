@@ -85,7 +85,7 @@ class DocenteUpdateView(SinPermisos, UpdateView):
 
 @method_decorator(login_required, name='dispatch')
 class DocenteDeleteView(SinPermisos, DeleteView):
-    permission_required = 'docentes.delete_docente'
+    permission_required = 'docente.delete_docente'
     model = Docente
     success_url = reverse_lazy('docente_urldash:list')
     success_message = "Docente eliminado satisfactoriamente"
