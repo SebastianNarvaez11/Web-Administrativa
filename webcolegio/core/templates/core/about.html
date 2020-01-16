@@ -11,18 +11,11 @@ Academico | Quienes Somos
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand logo_1" href="{% url 'index' %}"> <img
-                            src="{% if COLEGIO.logo %}{{COLEGIO.logo.url}}{% endif %}" alt="logo" height="100">
-                        <div class="banner_text_iner  ml-3 mt-4">
-                            <h3 class="text-white"> Academico<br>El Poblado</h3>
-                        </div>
-                    </a>
-                    <a class="navbar-brand logo_2" href="{% url 'index' %}"> <img
-                            src="{% if COLEGIO.logo %}{{COLEGIO.logo.url}}{% endif %}" alt="logo" height="100">
-                        <div class="banner_text_iner ml-3 mt-4">
-                            <h3> Academico<br>El Poblado</h3>
-                        </div>
-                    </a>
+                    <a class="navbar-brand" href="{% url 'index' %}">
+                        <img src="{% if COLEGIO.logo %}{{COLEGIO.logo.url}}{% endif %}" alt="logo" height="100"></a>
+                    <div class="banner_text_iner ml-2 mt-4" style="width:150px">
+                        <h3 class="text-white">{{COLEGIO.nombre}}</h3>
+                    </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
