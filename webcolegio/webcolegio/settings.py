@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'docentes',
     'services',
     'social',
+    'blog'
 ]
 
 MIDDLEWARE = [

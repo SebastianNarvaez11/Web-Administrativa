@@ -62,7 +62,7 @@ class SignUpView(SinPermisos, CreateView):
 
 @method_decorator(login_required, name='dispatch')
 class UserUpdateView(SinPermisos, UpdateView):
-    permission_required = 'registration.change_profile'
+    permission_required = 'auth.change_user'
     model = User
     form_class = UserUpdateForm
     template_name = 'registration/user_update_form.html'
@@ -77,7 +77,7 @@ class UserUpdateView(SinPermisos, UpdateView):
 
 @method_decorator(login_required, name='dispatch')
 class UserDeleteView(SinPermisos, DeleteView):
-    permission_required = 'registration.delete_user'
+    permission_required = 'auth.delete_user'
     model = User
     template_name = 'registration/user_confirm_delete.html'
     success_url = reverse_lazy('user_urldash:list')

@@ -32,9 +32,17 @@
 </head>
 
 <body>
-    <!--::header part start::-->
+    <!--::header part start::
     {% block barra %}
-    <header class="main_menu home_menu">
+    <header class="main_menu">
+        
+    </header>
+    {% endblock barra %}
+     Header part end-->
+
+    <!-- banner part start-->
+    {% block baner %}
+    <section class="banner_part main_menu">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
@@ -65,30 +73,21 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'docentes' %}">Docentes</a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'pdi_urldash:pdi' %}">PDI</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
                                 </li>
-                                {% if user.is_authenticated %}
-                                <li class="nav-item">
-                                    <a href="{% url 'home' %}" class="btn_1">DashBoard</a>
-                                </li>
-                                {%endif%}
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-    </header>
-    {% endblock barra %}
-    <!-- Header part end-->
-
-    <!-- banner part start-->
-    {% block baner %}
-    <section class="banner_part">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-xl-6">

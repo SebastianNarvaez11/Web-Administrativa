@@ -32,6 +32,8 @@ urlpatterns = [
     path('dashboard/grados/', include(grado_urldash)),
     path('dashboard/category/', include(category_urldash)),
     path('dashboard/post/', include(post_urldash)),
+    ##url blog
+    path('blog/', include('blog.urls')),
     # url pdi
     path('pdi/', include(pdi_urldash)),
     # url la app de services

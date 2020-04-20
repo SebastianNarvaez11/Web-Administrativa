@@ -1,0 +1,128 @@
+{% extends 'core/about.html' %}
+{% load static %}
+
+
+{% block titulo %}
+Academico | Blog
+{% endblock titulo %}
+
+{% block titulobaner %}
+Blog
+{% endblock titulobaner %}
+
+{% block body %}
+<!--================Blog Area =================-->
+<section class="blog_area section_padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    {% block post %}
+                    {% for post in posts %}
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <a href="{% url 'detallepost' post.id %}">
+                                <img class="card-img rounded-0" src="{{ post.imagen.url }}" alt="">
+                            </a>
+                            <a href="{% url 'detallepost' post.id %}" class="blog_item_date text-center">
+                                <h3>{{ post.creacion|date:"d" }}</h3>
+                                <p>{{ post.creacion|date:"M" }}</p>
+                            </a>
+                        </div>
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="{% url 'detallepost' post.id %}">
+                                <h2>{{ post.titulo }}</h2>
+                            </a>
+                            <p>{{ post.descripcion }}</p>
+                            <ul class="blog-info-link">
+                                <li>
+                                    <a href="javascript:void(0)"><i class="far fa-user"></i>{{ post.creacion }}</a>
+                                </li>
+                                <li class="float-right">
+                                    <a href="javascript:void(0)">Autor: {{post.autor}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                    {% endfor %}
+                    {% endblock post%}
+                    {%block nav%}
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <div class="pagination">
+                            {% if posts.has_previous %}
+                            <li class="page-item">
+                                <a href="?page=1" class="page-link">1</a>
+                            </li>
+
+                            <li class="page-item">
+                                <a href="?page={{ posts.previous_page_number }}" class="page-link"
+                                    aria-label="Previous"><i class="ti-angle-left"></i></a>
+                            </li>
+                            {% endif %}
+
+                            <span class="current mr-2 mt-2">
+                                Pagina {{ posts.number }} de {{ posts.paginator.num_pages }}
+                            </span>
+
+                            {% if posts.has_next %}
+                            <li class="page-item">
+                                <a href="?page={{ posts.next_page_number }}" class="page-link" aria-label="Next">
+                                    <i class="ti-angle-right"></i></a>
+                            </li>
+
+                            <li class="page-item">
+                                <a href="?page={{ posts.paginator.num_pages }}"
+                                    class="page-link">{{ posts.paginator.num_pages }}</a>
+                            </li>
+                            {% endif %}
+                        </div>
+                    </nav>
+                    {%endblock nav%}
+                </div>
+            </div>
+            {%block sidebar%}
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                        <form method="GET">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder='Buscar'
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Buscar'"
+                                        name="buscar">
+                                    <div class="input-group-append">
+                                        <button class="btn" type="button"><i class="ti-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button rounded-0 primary-bg text-white w-100 btn_1"
+                                type="submit">Buscar</button>
+                        </form>
+                    </aside>
+
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Post Recientes</h3>
+                        {% for post in lista_posts %}
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                                <div class="bloque col-md-4">
+                                    <img src="{{ post.imagen.url }}" class="card-img fotobloque" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{post.titulo}}</h5>
+                                        <p class="card-text">{{ post.creacion}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </aside>
+                </div>
+            </div>
+            {%endblock sidebar%}
+        </div>
+    </div>
+</section>
+{% endblock body %}

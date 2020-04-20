@@ -7,8 +7,7 @@ from .validators import *
 class Colegio(models.Model):
     nombre = models.CharField('Nombre', max_length=30, validators=[validate_only_letters, MinLengthValidator(7)])
     lema = models.CharField('Lema', max_length=50, validators=[validate_only_letters, MinLengthValidator(7)])
-    logo = models.ImageField(
-        'Logo', upload_to='colegio', blank=True, null=True)
+    logo = models.ImageField('Logo', upload_to='colegio', blank=True, null=True)
     email = models.EmailField('Email', max_length=254)
     direccion = models.CharField('Dirección', max_length=30, validators=[MinLengthValidator(7)])
     telefono = models.CharField('Telefono', max_length=12, validators=[validate_only_numbers, MinLengthValidator(5)])

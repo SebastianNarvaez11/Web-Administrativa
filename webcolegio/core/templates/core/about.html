@@ -6,27 +6,31 @@ Academico | Quienes Somos
 {% endblock titulo %}
 
 {% block barra %}
-<header class="main_menu single_page_menu">
+{% endblock barra %}
+
+
+{% block baner%}
+<section class="breadcrumb breadcrumb_bg main_menu">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
-                <nav class="navbar navbar-expand-lg navbar-light">
+                <nav class="navbar navbar-expand-lg ">
                     <a class="navbar-brand" href="{% url 'index' %}">
                         <img src="{% if COLEGIO.logo %}{{COLEGIO.logo.url}}{% endif %}" alt="logo" height="100"></a>
                     <div class="banner_text_iner ml-2 mt-4" style="width:150px">
                         <h3 class="text-white">{{COLEGIO.nombre}}</h3>
                     </div>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    <button class="navbar-toggler bg-gradiant-primary" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <img src="{% static 'core/img/icon-menu.png' %}" alt="icon-menu">
                     </button>
 
                     <div class="collapse navbar-collapse main-menu-item justify-content-end"
                         id="navbarSupportedContent">
                         <ul class="navbar-nav align-items-center">
                             <li class="nav-item  {% if request.path == '/' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+                                <a class="nav-link " href="{% url 'index' %}">Inicio</a>
                             </li>
                             <li class="nav-item {% if request.path == '/about/' %}active{% endif %}">
                                 <a class="nav-link" href="{% url 'about' %}">Nosotros</a>
@@ -37,29 +41,21 @@ Academico | Quienes Somos
                             <li class="nav-item {% if request.path == '/docentes/' %}active{% endif %}">
                                 <a class="nav-link" href="{% url 'docentes' %}">Docentes</a>
                             </li>
+                            <li class="nav-item {% if request.path|slice:":6" == '/blog/' %}active{% endif %}">
+                                <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                            </li>
                             <li class="nav-item {% if request.path|slice:":5" == '/pdi/' %}active{% endif %}">
                                 <a class="nav-link" href="{% url 'pdi_urldash:pdi' %}">PDI</a>
                             </li>
                             <li class="nav-item {% if request.path == '/contact/' %}active{% endif %}">
                                 <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
                             </li>
-                            {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a href="{% url 'home' %}" class="btn_1">DashBoard</a>
-                            </li>
-                            {%endif%}
                         </ul>
                     </div>
                 </nav>
             </div>
         </div>
     </div>
-</header>
-{% endblock barra %}
-
-
-{% block baner%}
-<section class="breadcrumb breadcrumb_bg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
