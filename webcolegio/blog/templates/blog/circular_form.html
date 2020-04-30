@@ -1,0 +1,60 @@
+{% extends 'dash/base.html' %}
+{% load static %}
+{% block titulo %} Academico | Blog {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="font-weight-bold text-uppercase mb-1">
+                        Crear Post
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <form method="POST" class="user" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="titulo"
+                                    id="id_titulo" placeholder="Titulo"
+                                    value="{% if form.titulo.value %}{{form.titulo.value}}{%endif%}" maxlength="200">
+                                <small class="text-danger"> {{ form.titulo.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="descripcion"
+                                    id="id_descripcion" placeholder="Descripcion"
+                                    value="{% if form.descripcion.value %}{{form.descripcion.value}}{%endif%}"
+                                    maxlength="500">
+                                <small class="text-danger"> {{ form.descripcion.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                {{form.contenido}}
+                            </div>
+                            <small class=" text-danger"> {{ form.contenido.errors }}</small>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-3 col-lg-3">
+                                <p><label for="id_imagen">Seleccione una imagen:</label>
+                                    <input type="file" name="imagen" accept="blog/*" required id="id_imagen"
+                                        value="{% if form.imagen.value %}{{form.imagen.url.value}}{%endif%}">
+                                </p>
+                                <small class="text-danger"> {{ form.imagen.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success">Crear</button>
+                                <a href="{% url 'blog_dash:list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

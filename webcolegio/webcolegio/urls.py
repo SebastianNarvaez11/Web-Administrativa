@@ -21,6 +21,7 @@ from pdi.urls import category_urldash, post_urldash, pdi_urldash
 from docentes.urls import materia_urldash, docente_urldash
 from core.urls import colegio_urldash, grado_urldash
 from social.urls import link_urldash
+from blog.urls import blog_urldash
 from registration.urls import user_urldash
 
 urlpatterns = [
@@ -31,7 +32,8 @@ urlpatterns = [
     path('dashboard/colegio/', include(colegio_urldash)),
     path('dashboard/grados/', include(grado_urldash)),
     path('dashboard/category/', include(category_urldash)),
-    path('dashboard/post/', include(post_urldash)),
+    path('dashboard/pdi/post/', include(post_urldash)),
+    path('dashboard/blog/post/', include(blog_urldash)),
     ##url blog
     path('blog/', include('blog.urls')),
     # url pdi

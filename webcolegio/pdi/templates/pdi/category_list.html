@@ -7,23 +7,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Lista De Categorias</h6>
-            <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Gestionar Categorias</div>
-                    <a class="dropdown-item" href="#"
-                        onclick="return abrir_modal('{% url 'category_dash:create' %}')">
-                        Nueva <i class="fas fa-plus"></i>
-                    </a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
+            <button type="button" class="btn btn-outline-success"
+                onclick="return abrir_modal('{% url 'category_dash:create' %}')">
+                Crear Categoria <i class="fas fa-plus ml-2"></i>
+            </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -32,10 +19,11 @@
                     No hay categorias para mostrar
                 </div>
                 {% else %}
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table data-classes="table table-hover earning-box" data-toggle="table" data-search="true" id="table"
+                    data-show-export="true" data-pagination="true" data-show-fullscreen="true" data-locale="es-CL" 
+                    data-page-size="5"  data-page-list="[5, 10, 25, all]">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Creacion</th>
                             <th scope="col">Edicion</th>
@@ -45,16 +33,15 @@
                     <tbody>
                         {% for category in category_list %}
                         <tr>
-                            <th scope="row">{{category.id}}</th>
                             <td>{{category.nombre}}</td>
                             <td>{{category.creacion|date:"d/m/y"}}</td>
                             <td>{{category.edicion|date:"d/m/y"}}</td>
-                            <td><a href="#"
-                                    onclick="return abrir_modal('{% url 'category_dash:update' category.id %}')"
+                            <td><a href="#" onclick="return abrir_modal('{% url 'category_dash:update' category.id %}')"
                                     class="btn btn-warning btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" onclick=" return abrir_modal('{% url 'category_dash:delete' category.id %}')"
+                                <a href="#"
+                                    onclick=" return abrir_modal('{% url 'category_dash:delete' category.id %}')"
                                     class="btn btn-danger btn-circle">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>

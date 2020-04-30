@@ -7,22 +7,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
-            <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Gestionar Usuarios</div>
-                    <a class="dropdown-item" href="#" onclick="return abrir_modal('{% url 'signup' %}')">
-                        Nuevo <i class="fas fa-plus"></i>
-                    </a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
+            <button type="button" class="btn btn-outline-success" onclick="return abrir_modal('{% url 'signup' %}')">
+                Crear Usuario  <i class="fas fa-plus ml-2"></i>
+            </button>   
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -31,10 +18,11 @@
                     No hay usuarios para mostrar
                 </div>
                 {% else %}
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table data-classes="table table-hover earning-box" data-toggle="table" data-search="true" id="table"
+                    data-show-export="true" data-pagination="true" data-show-fullscreen="true" data-locale="es-CL" 
+                    data-page-size="5"  data-page-list="[5, 10, 25, all]">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Usuario</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellido</th>
@@ -48,7 +36,6 @@
                     <tbody>
                         {% for user in user_list %}
                         <tr>
-                            <th scope="row">{{user.id}}</th>
                             <td>{{user.username}}</td>
                             <td>{{user.first_name}}</td>
                             <td>{{user.last_name}}</td>

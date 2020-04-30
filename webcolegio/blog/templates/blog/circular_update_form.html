@@ -1,0 +1,71 @@
+{% extends 'dash/base.html' %}
+{% load static %}
+{% block titulo %} Academico | Blog {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        Actualizar Post
+                    </div>
+                    <div class="dropdown-divider"></div>
+
+
+                    <form method="POST" class="user" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="titulo"
+                                    id="id_titulo" placeholder="Titulo" value="{{post.titulo}}" maxlength="200">
+                                <small class="text-danger"> {{ form.titulo.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-6">
+                                <input type="text" class="form-control form-control-user" required name="descripcion"
+                                    id="id_descripcion" placeholder="Descripcion" value="{{post.descripcion}}"
+                                    maxlength="500">
+                                <small class="text-danger"> {{ form.descripcion.errors }}</small>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-12 col-lg-12">
+                                {{form.contenido}}
+                            </div>
+                            <small class=" text-danger"> {{ form.contenido.errors }}</small>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-xl-6 col-lg-12 col-mb-12">
+                                {{form.imagen}}
+                                <small class="text-danger"> {{ form.imagen.errors }}</small>
+                            </div>
+                            <div class="form-group col-xl-6 col-lg-12 col-mb-12">
+                                <div class="contenedor">
+                                    <a href="{{ circular.imagen.url }}">
+                                        <img src="{{ circular.imagen.url }}" class="imagen rounded border-left-primary"
+                                            alt="...">
+                                    </a>
+                                    <br> Imagen Actual
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success">Actualizar</button>
+                                <a href="{% url 'blog_dash:list' %}" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--
+                    {{form.as_p}}
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
