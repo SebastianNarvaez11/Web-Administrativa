@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pdi',
     'core',
     'ckeditor',
+    'ckeditor_uploader',
     'contact',
     'dash',
     'docentes',
@@ -140,7 +141,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # media config
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 
 
@@ -153,7 +154,7 @@ if DEBUG:
 else:
     EMAIL_HOST = "smtp.gmail.com"
     EMAIL_HOST_USER = "testing.developer.404@gmail.com"
-    EMAIL_HOST_PASSWORD = 'tatannvrz'
+    EMAIL_HOST_PASSWORD = 'xxjhrprkiiawltht'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
 

@@ -1,6 +1,7 @@
 from django.db import models
 from docentes.models import Materia
 from .validators import *
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 
@@ -14,7 +15,7 @@ class Colegio(models.Model):
     horarios = models.CharField('Horarios', max_length=100, validators=[MinLengthValidator(2)])
     mision = models.TextField('Misión')
     vision = models.TextField('Vision')
-    historia = models.TextField('Historia')
+    historia = RichTextUploadingField('Historia')
     creacion = models.DateField('Fecha de creacion', auto_now_add=True)
     edicion = models.DateField('Fecha de edicion', auto_now=True)
 

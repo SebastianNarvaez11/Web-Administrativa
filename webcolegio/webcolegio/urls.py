@@ -56,6 +56,7 @@ urlpatterns = [
     # url de autenticacion
     path('accounts/', include('registration.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('ckeditor/',include('ckeditor_uploader.urls'))
 ]
 
 

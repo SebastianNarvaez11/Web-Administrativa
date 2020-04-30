@@ -17,12 +17,14 @@
                         <div class="row ">
                             <div class="form-group col-xl-6 col-lg-6">
                                 <input type="text" class="form-control form-control-user" required name="nombre"
-                                    id="id_nombre" placeholder="Nombre" value="{{colegio.nombre}}" maxlength="30" minlength="7"> 
+                                    id="id_nombre" placeholder="Nombre" value="{{colegio.nombre}}" maxlength="30"
+                                    minlength="7">
                                 <small class="text-danger"> {{ form.nombre.errors }}</small>
                             </div>
                             <div class="form-group col-xl-6 col-lg-6">
                                 <input type="text" class="form-control form-control-user" required name="lema"
-                                    id="id_lema" placeholder="Lema" value="{{colegio.lema}}" maxlength="50" minlength="7">  
+                                    id="id_lema" placeholder="Lema" value="{{colegio.lema}}" maxlength="50"
+                                    minlength="7">
                                 <small class="text-danger"> {{ form.lema.errors }}</small>
                             </div>
                         </div>
@@ -35,46 +37,43 @@
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="text" class="form-control form-control-user" required name="direccion"
                                     id="id_direccion" placeholder="Direccion" value="{{colegio.direccion}}"
-                                    maxlength="30" minlength="7"> 
+                                    maxlength="30" minlength="7">
                                 <small class="text-danger">{{ form.direccion.errors }}</small>
                             </div>
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="text" class="form-control form-control-user" required name="telefono"
-                                    id="id_telefono" placeholder="Telefono" value="{{colegio.telefono}}" maxlength="12" minlength="5"> 
+                                    id="id_telefono" placeholder="Telefono" value="{{colegio.telefono}}" maxlength="12"
+                                    minlength="5">
                                 <small class="text-danger">{{ form.telefono.errors }}</small>
                             </div>
                             <div class="form-group col-xl-3 col-lg-3">
                                 <input type="text" class="form-control form-control-user" required name="horarios"
-                                    id="id_horarios" placeholder="Horarios" value="{{colegio.horarios}}" maxlength="100" minlength="2">
+                                    id="id_horarios" placeholder="Horarios" value="{{colegio.horarios}}" maxlength="100"
+                                    minlength="2">
                                 <small class="text-danger"> {{ form.horarios.errors }}</small>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="form-group col-xl-6 col-lg-6">
-                                Mision
+                                Misión
                                 <textarea class="form-control" cols="40" id="mision" name="mision" rows="5"
-                                    placeholder="Mision">
+                                    placeholder="Misión">
                                                     {{colegio.mision}}
                                                 </textarea>
                                 <small class="text-danger"> {{ form.mision.errors }}</small>
                             </div>
                             <div class="form-group col-xl-6 col-lg-6">
-                                Vision
+                                Visión
                                 <textarea class="form-control" cols="40" id="id_vision" name="vision" rows="5"
-                                    placeholder="Mision">
+                                    placeholder="Visión">
                                                     {{colegio.vision}}
                                                 </textarea>
                                 <small class="text-danger"> {{ form.vision.errors }}</small>
                             </div>
                         </div>
-                        <div class="row ">
+                        <div class="row">
                             <div class="form-group col-xl-12 col-lg-12">
-                                Historia
-                                <textarea class="form-control" cols="40" id="id_historia" name="historia" rows="5"
-                                    placeholder="Historia">
-                                                    {{colegio.historia}}
-                                                    </textarea>
-                                <small class="text-danger"> {{ form.historia.errors }}</small>
+                                {{form.historia}}
                             </div>
                         </div>
                         <div class="row">

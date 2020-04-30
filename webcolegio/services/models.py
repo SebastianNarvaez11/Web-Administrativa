@@ -1,6 +1,6 @@
 from django.db import models
 import re
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from core.validators import *
 # Create your models here.
 
@@ -18,7 +18,7 @@ class Service(models.Model):
     titulo = models.CharField('Titulo', max_length=20, unique=True, validators=[MinLengthValidator(4)])
     slug = models.SlugField('Slug/Url')
     descripcion = models.CharField('Descripción', max_length=50)
-    contenido = RichTextField('Contenido')
+    contenido = RichTextUploadingField('Contenido')
     mensualidad = models.IntegerField('Mensualidad', validators=[MinValueValidator(0)])
     matricula = models.IntegerField('Matricula', validators=[MinValueValidator(0)])
     imagen = models.ImageField('Imagen', upload_to=custom_upload_to)

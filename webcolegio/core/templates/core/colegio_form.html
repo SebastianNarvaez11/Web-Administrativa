@@ -70,14 +70,11 @@
                             </div>
                         </div>
                         <div class="row ">
-                            <div class="form-group col-xl-6 col-lg-6">
-                                Historia
-                                <textarea class="form-control" cols="40" id="id_historia" name="historia" rows="5"
-                                    placeholder="Historia">
-                                            {{colegio.historia}}
-                                            </textarea>
-                                <small class="text-danger"> {{ form.historia.errors }}</small>
+                            Historia
+                            <div class="form-group col-xl-12 col-lg-12">
+                                {{form.historia}}
                             </div>
+                            <small class=" text-danger"> {{ form.historia.errors }}</small>
                             <div class="form-group col-xl-6 col-lg-6 ">
                                 Seleccione un logo:
                                 <br>

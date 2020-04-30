@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 def custom_upload_to(instance, filename):
@@ -16,7 +16,7 @@ def custom_upload_to(instance, filename):
 class Circular(models.Model):
     titulo = models.CharField('Titulo', max_length=200, unique=True)
     descripcion = models.TextField('Descripcion', max_length=300, blank=True, null=True)
-    contenido = RichTextField('Contenido')
+    contenido = RichTextUploadingField('Contenido')
     imagen = models.ImageField('Imagen', upload_to=custom_upload_to) 
     # autor enlazado con los autores de django
     autor = models.ForeignKey(User, verbose_name='Autor', on_delete=models.CASCADE)
