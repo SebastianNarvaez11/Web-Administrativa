@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lilita+One&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6360d14138.js" crossorigin="anonymous"></script>
     {% block style %}{% endblock style %}
 </head>
 
@@ -372,21 +373,21 @@
                 </div>
                 <div class="col-sm-6 col-md-4 col-xl-4">
                     <div class="single-footer-widget footer_2">
-                        <h4>Información</h4>
+                        <h4>Redes Sociales</h4>
                         <p>Stay updated with our latest trends Seed heaven so said place winged over given forth fruit.
                         </p>
-                        <div class="social_icon">
+                        <div class="social_icon" style="font-size: 24px;">
                             {% if LINK_FACEBOOK %}
-                            <a href="{{LINK_FACEBOOK}}"> <i class="ti-facebook"></i></a>
+                            <a href="{{LINK_FACEBOOK}}"> <i class="fab fa-facebook-square fa-5x"></i></a>
                             {% endif %}
                             {% if LINK_TWITTER %}
-                            <a href="{{LINK_TWITTER}}"> <i class="ti-twitter-alt"></i></a>
+                            <a href="{{LINK_TWITTER}}"> <i class="fab fa-twitter fa-5x"></i></a>
                             {% endif %}
                             {% if LINK_INSTAGRAM %}
-                            <a href="{{LINK_INSTAGRAM}}"> <i class="ti-instagram"></i></a>
+                            <a href="{{LINK_INSTAGRAM}}"><i class="fab fa-instagram fa-5x"></i></a>
                             {% endif %}
                             {% if LINK_YOUTUBE %}
-                            <a href="{{LINK_YOUTUBE}}"> <i class="ti-youtube"></i></a>
+                            <a href="{{LINK_YOUTUBE}}"> <i class="fab fa-youtube fa-5x"></i> </i></a>
                             {% endif %}
                         </div>
                     </div>
