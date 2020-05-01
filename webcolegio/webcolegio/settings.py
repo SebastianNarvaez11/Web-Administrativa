@@ -25,7 +25,7 @@ SECRET_KEY = '$wtg_35jys5yy&qk&8k$xoy^5i=#^$^3y47f9^#un*c^p%i&2j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = [ 'www.academicoelpoblado.com','academicoelpoblado.pythonanywhere.com','localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
